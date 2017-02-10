@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<title>CADI 서종인 1주차 미션</title>
+		<td align=center valign=top>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<table border = "1">
+		<tr>
+		<td>
+			<a href="http://www.hongik.ac.kr">
+			<img src="jongin1.jpg" />
+			</a>
+		</td>
+		<td>
+		<pre>
+		<font color= "orange">
+		<h1>
+		자기소개</h1></font><h3>
+	이름 : 서종인
+	나이 : 26
+	소속 : CADI W개발
+	학교 : 홍익대학교
+	학과 : 컴퓨터공학과 
+	학년 : 4학년
+
+	CADI 활동을 열심히 해서 많은 분들과 친해지고
+	많은 것을 얻어가고 싶습니다.
+	잘부탁드립니다!
+	</h3>
+		<br>
+<font color="orange">
+	<h1>
+	   만들고 싶은 홈페이지</h1></font><h3>
+	평소에 무언가에 관련한 사진을 네이버 이미지를 통해 많이 찾습니다.
+	하나의 홈페이지를 만들어 웹공간에서의 사진관을 만들어
+	인물,풍경,음식 등 전 분야의 사진을 담아두고 필요한 사용자가
+	홈페이지를 접속해 찾아서 활용할 수 있도록 웹 사진관을 만들고 싶습니다.
+	</h3>
+		</pre>
+		</td>
+		</tr>
+	</body>
+</html>
