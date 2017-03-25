@@ -1,0 +1,204 @@
+var num = 3;
+var num1 = 2.5;
+var num2 = 2.5;
+var num3 = 3.0;
+var double = 2.5;
+var string = "2.5";
+
+// 연산자
+
+var a = (num1==num2)||10;
+var b = ("num1"=="num2")||10;
+
+var c = (num1==num2)&&10;
+var d = ("num1"=="num2")&&10;
+
+
+console.log(3 * 2);
+console.log("3" * "2");
+console.log(3 * string);
+console.log("3" * string);
+//console.log(num + obj);
+
+//연산자 출력
+console.log(a);
+console.log(b);
+console.log(c);
+console.log(d);
+
+
+
+
+
+//////////////////////// Array //////////////////////
+
+// 배열 길이 크기 조정
+var array = [1,"hi",3,true,5];
+var i = array.length;
+array[i] = 3;
+array[i+1] = "server";
+
+
+// 배열 길이가 7로 늘어남
+console.log(array.length);
+
+// 배열 순회
+for(var j=0 ; j<array.length ; j++){
+  console.log(array[j]);
+}
+// 배열 원소 삭제
+
+delete array[3]; // 4번째 원소 삭제
+
+// 삭제 test loop
+for(var j=0 ; j<array.length ; j++){
+  console.log(array[j]);
+}
+
+// 삭제된 원소 순회x
+for(var i in array){
+  console.log(array[i]);
+}
+
+// 배열 길이 0으로 하면 배열 안 원소 삭제
+array.length = 0;
+
+console.log(array);
+
+
+
+
+
+//////////////////////// JSON Object ///////////////////////
+
+//JSON(객체) key : value => property
+var obj = {
+  "이름" : "서종인" , // string
+  "나이" : 26 , // integer value
+  "자기소개" : ["안녕하세요" , "하하"] , // array
+  "좋아하는 것" : {"음식" : "계란" , "가수" : "아이유"} ,// object in object
+  "foo" : function(){
+    console.log("object의 property에 fuction 가능"); // function
+  }
+};
+
+console.log(obj.이름);
+console.log(obj["나이"]);
+console.log(obj.foo());
+
+
+
+
+
+///////////////////// function ///////////////
+
+function plus(a,b){
+  return a+b;
+}
+
+// 익명 함수
+var minus = function(a,b){
+  return a-b;
+};
+
+console.log(plus(13,14)); // 27
+console.log(minus(13,14)); // -1
+
+function executor(object, func){
+  func(object);
+}
+
+var hamsu = function(obj){
+  for(var i in obj) console.log(obj[i]);
+};
+
+executor(obj,hamsu);
+
+// 함수를 return 하는 함수
+
+function executor2(){
+  return function(name){
+    console.log("댄스왕 : " + name);
+  };
+}
+
+executor2()("와아아아");
+
+
+
+
+
+////////////// variable range ////////////////////
+
+//// global , local variable ////
+
+var scope = 'global';
+
+function checkscope(){
+  var scope = 'local';
+  return scope;
+}
+
+scope2 = 'global2'; // 전역변수는 var가 필요 x
+
+function checkscope2(){
+  scope2 = 'local2';  // var 키워드가 없어 지역변수x 전역변수의 값에 덮음
+  return scope2;
+}
+console.log(checkscope());
+console.log(scope);
+
+console.log(checkscope2());
+console.log(scope2);
+
+//// hoisting ////
+// 변수의 유효범위 [ {} : x , funcion : o]
+// {} 단위의 변수 선언 var -> let
+function scopeTest() {
+  var a2 = 0;
+  if (true) {
+      var b = 0;
+      let b2 = 0;
+      for (var c = 0; c < 5; c++) {
+        console.log("c=" + c);
+      } console.log("c=" + c);
+    }
+    console.log("b=" + b);
+  //  console.log("b2=" + b2); -> let으로 선언되어서 error
+  } scopeTest();
+// console.log("a2=" + a2); -> error
+
+
+//// lexical 영역 ////
+// 함수 실행 환경이 아닌 함수 정의 환경에서 변수를 찾는다
+
+var a3 = 0;
+
+function myFunction(){
+  console.log(a3);
+  /* myFunction을 호출했을때 환경 범위가 전체가 아닌
+     myFunction의 정의 영역 안에서만 변수를 찾음
+     따라서 a3가 정의되기 전이니 undefined가 나옴 */
+
+  var a3 = 999;
+  console.log(a3);
+}
+
+myFunction();
+console.log(a3);
+
+// example 2
+
+function hello(){
+  var hola = "hola";
+  hello_returner();
+}
+
+function hello_returner(){
+  return hola;
+}
+// error colsole.log(hello());
+/* hello function에서 hola를 정의했지만
+   hello_returner 의 return값 hola는
+   hello_returner function 안에서 찾기때문에
+   정의가 되어있지 않으니 error */
