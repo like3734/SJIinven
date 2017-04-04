@@ -1,0 +1,54 @@
+
+
+var pocketmon = {
+  list: [], //add_monster를 호출하면 list배열에 포켓몬객체가 저장됩니다.
+
+  jinwha: function(name){ //포켓몬의 특성에 맞는 돌이 인자로 넘어오면 호출됩니다.
+    console.log(name+"(으)로 진화~!");
+  },
+
+  getNames: function(){
+    for(let i=0 ; i<this.list.length ; i++){  // for문 안에서만 변수 i 사용
+      console.log(this.list[i]);
+    }//list 배열 내에 저장됩 모든 포켓몬객체들의 이름 값을 출력합니다.
+  },
+
+  add_monster : function(name){
+    this.list.push(name);
+  }, // 포켓몬을 넘겨받으면 list에 추가
+
+  PocketInfo : {
+    "꼬부기" : { evolve_name : "어니부기" , evolve_stone : { color: "violet", core : "aqua" } },
+    "피카츄" : { evolve_name : "라이츄" , evolve_stone : { color: "green", core : "thunder" } },
+    "파이리" : { evolve_name : "리자드" , evolve_stone : { color: "yellow", core : "fire" } }
+    // 각 포켓몬의 진화 이름(evolve_name)과 진화에 필요한 돌(evolve_stone)의 특성
+  },
+
+  is_evolved : function(name, stone){
+
+    if( name in this.PocketInfo ){ // 받아온 포켓몬이 PocketInfo 에 있는지
+        if( stone.color == this.PocketInfo[name].evolve_stone.color && stone.core == this.PocketInfo[name].evolve_stone.core) // stone 일치
+        {
+
+          for(let i in this.list){    // for문 안에서만 변수 i를 사용
+            if( name == this.list[i])
+              this.list[i] = this.PocketInfo[name].evolve_name;
+          }// list set
+
+          return(this.jinwha(this.PocketInfo[name].evolve_name)); // evolution , 일급함수[함수 return]
+        }
+        else{ // stone 불일치
+          console.log("아야!");
+        }
+    }
+  else { // 이 포켓몬의 정보는 모른다.
+    console.log("I don't no " + name + " Infomation");
+  }
+}
+//모든 코드는 외부모듈로 쓰일 pocketmon객체 안에서 구현해주세요.
+
+};
+
+
+
+module.exports = pocketmon;
