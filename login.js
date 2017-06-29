@@ -77,7 +77,7 @@ router.post('/', function(req, res) {
         });
       }
       else {
-        let query4 = 'select * from User where userid = ? ';
+        let query4 = 'select nickname, part from User where userid = ? ';
         values[2].query(query4, comid, (err, data) =>{
           if(err) res.status(500).send({ result: [], message: 'data failed : ' + err});
           res.status(201).send({ result: data , message: 'old' });

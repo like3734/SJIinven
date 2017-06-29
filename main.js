@@ -119,8 +119,13 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
               getallinfo.push(info);
             }
             connection.query(query4, getallinfo, function(err, data4) {
-              let ary_allinfo = new Array();
-              let ary_commentinfo = new Array(new Array(), new Array(2));
+              //let ary_allinfo = new Array();
+              ary_allinfo = [];
+              let arylength = getallinfo.length;
+              let ary_commentinfo = [];
+              for(let idx=0; idx<arylength; idx++){
+                ary_commentinfo[idx] = new Array();
+              }
               let count;
               for (var b in getallinfo) {
                 count = 0;
@@ -135,29 +140,9 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
                     count++;
                   };
                 }
-                if (ary_commentinfo[b][0] === undefined) {
-                  let n_commentinfo = {
-                    user_nick: " ",
-                    content: " ",
-                    image: " "
-                  };
-                  ary_commentinfo[b][0] = n_commentinfo;
-                  ary_commentinfo[b][1] = n_commentinfo;
-                } else if (ary_commentinfo[b][1] === undefined) {
-                  let n_commentinfo = {
-                    user_nick: " ",
-                    content: " ",
-                    image: " "
-                  };
-                  ary_commentinfo[b][1] = n_commentinfo;
-                } else {};
               }
               for (var d in getallinfo) {
-                let joininfo = {
-                  postinfo: getallinfo[d],
-                  commentinfo: ary_commentinfo[d]
-                };
-                ary_allinfo[d] = joininfo;
+                ary_allinfo[d] = [ getallinfo[d], ary_commentinfo[d] ];
               }
               res.status(203).send({
                 result: ary_allinfo,
@@ -271,8 +256,13 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
               getallinfo.push(info);
             }
             connection.query(query4, getallinfo, function(err, data4) {
-              let ary_allinfo = new Array();
-              let ary_commentinfo = new Array(new Array(), new Array(2));
+              //let ary_allinfo = new Array();
+              ary_allinfo = [];
+              let arylength = getallinfo.length;
+              let ary_commentinfo = [];
+              for(let idx=0; idx<arylength; idx++){
+                ary_commentinfo[idx] = new Array();
+              }
               let count;
               for (var b in getallinfo) {
                 count = 0;
@@ -287,29 +277,9 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
                     count++;
                   };
                 }
-                if (ary_commentinfo[b][0] === undefined) {
-                  let n_commentinfo = {
-                    user_nick: " ",
-                    content: " ",
-                    image: " "
-                  };
-                  ary_commentinfo[b][0] = n_commentinfo;
-                  ary_commentinfo[b][1] = n_commentinfo;
-                } else if (ary_commentinfo[b][1] === undefined) {
-                  let n_commentinfo = {
-                    user_nick: " ",
-                    content: " ",
-                    image: " "
-                  };
-                  ary_commentinfo[b][1] = n_commentinfo;
-                } else {};
               }
               for (var d in getallinfo) {
-                let joininfo = {
-                  postinfo: getallinfo[d],
-                  commentinfo: ary_commentinfo[d]
-                };
-                ary_allinfo[d] = joininfo;
+                ary_allinfo[d] = [ getallinfo[d], ary_commentinfo[d] ];
               }
               res.status(203).send({
                 result: ary_allinfo,
@@ -423,8 +393,13 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
               getallinfo.push(info);
             }
             connection.query(query4, getallinfo, function(err, data4) {
-              let ary_allinfo = new Array();
-              let ary_commentinfo = new Array(new Array(), new Array(2));
+              //let ary_allinfo = new Array();
+              ary_allinfo = [];
+              let arylength = getallinfo.length;
+              let ary_commentinfo = [];
+              for(let idx=0; idx<arylength; idx++){
+                ary_commentinfo[idx] = new Array();
+              }
               let count;
               for (var b in getallinfo) {
                 count = 0;
@@ -439,29 +414,9 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
                     count++;
                   };
                 }
-                if (ary_commentinfo[b][0] === undefined) {
-                  let n_commentinfo = {
-                    user_nick: " ",
-                    content: " ",
-                    image: " "
-                  };
-                  ary_commentinfo[b][0] = n_commentinfo;
-                  ary_commentinfo[b][1] = n_commentinfo;
-                } else if (ary_commentinfo[b][1] === undefined) {
-                  let n_commentinfo = {
-                    user_nick: " ",
-                    content: " ",
-                    image: " "
-                  };
-                  ary_commentinfo[b][1] = n_commentinfo;
-                } else {};
               }
               for (var d in getallinfo) {
-                let joininfo = {
-                  postinfo: getallinfo[d],
-                  commentinfo: ary_commentinfo[d]
-                };
-                ary_allinfo[d] = joininfo;
+                ary_allinfo[d] = [ getallinfo[d], ary_commentinfo[d] ];
               }
               res.status(203).send({
                 result: ary_allinfo,
@@ -575,8 +530,13 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
               getallinfo.push(info);
             }
             connection.query(query4, getallinfo, function(err, data4) {
-              let ary_allinfo = new Array();
-              let ary_commentinfo = new Array(new Array(), new Array(2));
+              //let ary_allinfo = new Array();
+              ary_allinfo = [];
+              let arylength = getallinfo.length;
+              let ary_commentinfo = [];
+              for(let idx=0; idx<arylength; idx++){
+                ary_commentinfo[idx] = new Array();
+              }
               let count;
               for (var b in getallinfo) {
                 count = 0;
@@ -591,29 +551,9 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
                     count++;
                   };
                 }
-                if (ary_commentinfo[b][0] === undefined) {
-                  let n_commentinfo = {
-                    user_nick: " ",
-                    content: " ",
-                    image: " "
-                  };
-                  ary_commentinfo[b][0] = n_commentinfo;
-                  ary_commentinfo[b][1] = n_commentinfo;
-                } else if (ary_commentinfo[b][1] === undefined) {
-                  let n_commentinfo = {
-                    user_nick: " ",
-                    content: " ",
-                    image: " "
-                  };
-                  ary_commentinfo[b][1] = n_commentinfo;
-                } else {};
               }
               for (var d in getallinfo) {
-                let joininfo = {
-                  postinfo: getallinfo[d],
-                  commentinfo: ary_commentinfo[d]
-                };
-                ary_allinfo[d] = joininfo;
+                ary_allinfo[d] = [ getallinfo[d], ary_commentinfo[d] ];
               }
               res.status(203).send({
                 result: ary_allinfo,
@@ -630,7 +570,7 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
 });
 
 // 좋아요 누를 시
-router.post('/postlike/:user_nick/:post_id', (req, res) => {
+router.get('/postlike/:user_nick/:post_id', (req, res) => {
   return new Promise((fulfill, reject) => {
       pool.getConnection((err, connection) => {
         if (err) reject(err);
@@ -638,20 +578,13 @@ router.post('/postlike/:user_nick/:post_id', (req, res) => {
       });
     })
     .catch(err => {
-      res.status(500).send({
-        result: [],
-        message: 'getConnection error : ' + err
-      });
+      res.status(500).send({ result: [], message: 'getConnection error : ' + err });
     })
     .then(connection => {
       return new Promise((fulfill, reject) => {
         let query = 'select count(*) as count from PostLikeCount where user_nick=? and post_id=?';
         connection.query(query, [req.params.user_nick, req.params.post_id], (err, data) => {
-          if (err) res.status(500).send({
-            result: [],
-            message: 'first error: ' + err
-          });
-
+          if (err) res.status(500).send({ result: [], message: 'first error: ' + err });
           else {
             if (data[0].count == 0) { // 좋아요!!!!!!!!!!!!!!!!!!!!!!!!!!!!
               let query2 = 'insert into PostLikeCount set ?';
@@ -660,57 +593,54 @@ router.post('/postlike/:user_nick/:post_id', (req, res) => {
                 post_id: req.params.post_id
               };
               connection.query(query2, record, (err, data) => {
-                if (err) res.status(500).send({
-                  result: [],
-                  message: 'second error: ' + err
-                });
+                if (err) res.status(500).send({ result: [], message: 'second error: ' + err });
                 else {
                   let query3 = 'update Post set likecount=likecount+1 where id=?';
                   connection.query(query3, [req.params.post_id], (err, data) => {
-                    if (err) res.status(500).send({
-                      result: [],
-                      message: 'third error: ' + err
-                    });
-                    else res.status(200).send({
-                      result: data,
-                      message: 'ok'
-                    });
-                    connection.release();
+                    if (err) res.status(500).send({ result: [], message: 'third error: ' + err });
+                    else {
+                      let query4 = 'select likecount from Post where id = ? ';
+                      connection.query(query4, [req.params.post_id], (err, data) =>{
+                        if(err) res.status(500).send({ result: [], message: ' select likecount err : ' + err });
+                        else{
+                            res.status(200).send({ result: data, message: 'like' });
+                        }
+                        connection.release();
+                      });
+                    }
                   });
                 }
               });
             } else { // 안좋아요!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-              let query4 = 'delete from PostLikeCount where user_nick=? and post_id=?';
-              connection.query(query4, [req.params.user_nick, req.params.post_id], (err, data) => {
-                if (err) res.status(500).send({
-                  result: [],
-                  message: 'fourth error: ' + err
-                });
+              let query5 = 'delete from PostLikeCount where user_nick=? and post_id=?';
+              connection.query(query5, [req.params.user_nick, req.params.post_id], (err, data) => {
+                if (err) res.status(500).send({ result: [], message: 'fourth error: ' + err });
                 else {
-                  let query5 = 'update Post set likecount=likecount-1 where id=?';
-                  connection.query(query5, [req.params.post_id], (err, data) => {
-                    if (err) res.status(500).send({
-                      result: [],
-                      message: 'fifth error: ' + err
-                    });
-                    else res.status(200).send({
-                      result: data,
-                      message: 'ok'
-                    });
-                    connection.release();
+                  let query6 = 'update Post set likecount=likecount-1 where id=?';
+                  connection.query(query6, [req.params.post_id], (err, data) => {
+                    if (err) res.status(500).send({ result: [], message: 'fifth error: ' + err });
+                    else {
+                      let query7 = 'select likecount from Post where id = ? ';
+                      connection.query(query7, [req.params.post_id], (err, data) =>{
+                        if(err) res.status(500).send({ result: [], message: ' select likecount err : ' + err });
+                        else{
+                            res.status(200).send({ result: data, message: 'unlike' });
+                        }
+                        connection.release();
+                      });
+                    }
                   });
                 }
               });
             }
           }
         });
-
       });
     })
 });
 
 //게시글 찜하기 100%
-router.post('/favoritepost', (req, res) => {
+router.get('/bookmark/:user_nick/:post_id', (req, res) => {
   return new Promise((fulfill, reject) => {
       pool.getConnection((err, connection) => {
         if (err) reject(err);
@@ -725,9 +655,9 @@ router.post('/favoritepost', (req, res) => {
     })
     .then(connection => {
       return new Promise((fulfill, reject) => {
-        let usernick = req.body.user_nick;
-        let postid = req.body.post_id;
-        let query = 'select user_nick from FavoritePost where user_nick = ? and post_id = ? ';
+        let usernick = req.params.user_nick;
+        let postid = req.params.post_id;
+        let query = 'select count(*) as fcount from FavoritePost where user_nick = ? and post_id = ? ';
         connection.query(query, [usernick, postid], (err, data) => {
           if (err) reject([err, connection]);
           else fulfill([data, usernick, postid, connection]);
@@ -735,45 +665,29 @@ router.post('/favoritepost', (req, res) => {
       });
     })
     .catch(values => {
-      res.status(403).send({
-        message: ' err : ' + values[0]
-      });
+      res.status(403).send({ message: ' err : ' + values[0] });
       values[1].release();
     })
     .then(values => {
       return new Promise((reject, fulfill) => {
         let usernick = values[1];
         let postid = values[2];
-        console.log(values[0][0]);
-        console.log(usernick);
-        console.log(postid);
-        if (values[0][0] === undefined) {
-          console.log(usernick);
-          console.log(postid);
+        if (values[0][0].fcount === 0 ) {
           let query2 = 'insert into FavoritePost set ? ';
           let record = {
             user_nick: usernick,
             post_id: postid
           };
           values[3].query(query2, record, function(err, data) {
-            console.log(data);
-            if (err) res.status(500).send({
-              message: 'fail'
-            });
-            else res.status(203).send({
-              message: 'ok'
-            });
+            if (err) res.status(500).send({ message: 'fail' });
+            else res.status(203).send({ message: 'mark' });
             values[3].release();
           });
         } else {
           let query3 = 'delete from FavoritePost where user_nick = ? and post_id = ?';
           values[3].query(query3, [usernick, postid], function(err, data) {
-            if (err) res.status(500).send({
-              message: 'fail'
-            });
-            else res.status(203).send({
-              message: 'ok'
-            });
+            if (err) res.status(500).send({ message: 'fail' });
+            else res.status(203).send({ message: 'unmark' });
             values[3].release();
           });
         }
@@ -782,7 +696,7 @@ router.post('/favoritepost', (req, res) => {
 });
 
 // 게시글 작성 화면 100%
-router.get('/pwrite/:user_nick', (req, res) => {
+router.get('/write/:user_nick', (req, res) => {
   return new Promise((fulfill, reject) => {
       pool.getConnection((err, connection) => {
         if (err) reject(err);
@@ -790,34 +704,25 @@ router.get('/pwrite/:user_nick', (req, res) => {
       });
     })
     .catch(err => {
-      res.status(500).send({
-        result: [],
-        message: 'getConnection error : ' + err
-      });
+      res.status(500).send({ result: [], message: 'getConnection error : ' + err });
     })
     .then(connection => {
       return new Promise((fulfill, reject) => {
         let query = 'select User.profile,User.level,User.nickname,User.part from User where User.nickname=?';
-        //user_nick_temp = req.params.user_nick;
         connection.query(query, [req.params.user_nick], (err, data) => {
-          if (err) res.status(500).send({
-            result: [],
-            message: 'selecting user error: ' + err
-          });
+          if (err) res.status(500).send({ result: [], message: 'selecting user error: ' + err });
           else res.status(200).send({
             result: data,
             message: 'ok'
           });
-          //else res.status(200).send({data});
-
           connection.release();
         });
       });
     })
 });
 
-// 글 작성한 뒤 '게시하기'눌렀을 시 [ 확인귀찮.. API짤 때 DB재대로 구성하고 다시 확인 ]
-router.post('/add/:user_nick', (req, res) => {
+// 글 작성한 뒤 '게시하기'눌렀을 시
+router.post('/add', upload.array('image', 5), (req, res) => {
   return new Promise((fulfill, reject) => {
       pool.getConnection((err, connection) => {
         if (err) reject(err);
@@ -825,38 +730,28 @@ router.post('/add/:user_nick', (req, res) => {
       });
     })
     .catch(err => {
-      res.status(500).send({
-        result: [],
-        message: 'getConnection error : ' + err
-      });
+      res.status(500).send({ result: [], message: 'getConnection error : ' + err });
     })
     .then(connection => {
       return new Promise((fulfill, reject) => {
         let query = 'insert into Post set ?';
+        //console.log(req.files);
         let record = {
           category: req.body.category,
           part: req.body.part,
           title: req.body.title,
           contents: req.body.contents,
-          image1: req.body.image1,
-          image2: req.body.image2,
-          image3: req.body.image3,
-          image4: req.body.image4,
-          image5: req.body.image5,
-          user_nick: req.params.user_nick,
+          image1: req.files[0] ? req.files[0].location : null,
+          image2: req.files[1] ? req.files[1].location : null,
+          image3: req.files[2] ? req.files[2].location : null,
+          image4: req.files[3] ? req.files[3].location : null,
+          image5: req.files[4] ? req.files[4].location : null,
+          user_nick: req.body.user_nick,
           written_time: moment(new Date()).format('YYYY-MM-DD')
         };
         connection.query(query, record, (err, data) => {
-          if (err) res.status(500).send({
-            result: [],
-            message: 'selecting user error: ' + err
-          });
-          else res.status(200).send({
-            result: data,
-            message: 'ok'
-          });
-          //else res.status(200).send({data});
-
+          if (err) res.status(500).send({ message: 'selecting user error: ' + err  });
+          else res.status(200).send({ message: 'ok' });
           connection.release();
         });
       });
@@ -902,9 +797,7 @@ router.get('/post/:post_id', (req, res) => {
             commentcount: data[0].commentcount
           };
           connection.query(query2, [postid, postinfo], (err, data2) => {
-            if (err) res.status(500).send({
-              message: 'fail'
-            });
+            if (err) res.status(500).send({ message: 'fail' });
             else {
               let com = [data2[0], data2[1]];
               let ary_all = [postinfo, com];
@@ -952,8 +845,9 @@ router.post('/find', (req, res) => {
         });
 
       });
-    })
+    });
 });
+
 
 //게시글 삭제 100%
 router.post('/delete', (req, res) => {
@@ -964,10 +858,7 @@ router.post('/delete', (req, res) => {
       });
     })
     .catch(err => {
-      res.status(500).send({
-        result: [],
-        message: 'getConnection error : ' + err
-      });
+      res.status(500).send({ message: 'getConnection error : ' + err });
     })
     .then(connection => {
       return new Promise((fulfill, reject) => {
@@ -975,18 +866,48 @@ router.post('/delete', (req, res) => {
         let usernick = req.body.user_nick;
         let query = 'delete from Post where id = ? and user_nick = ? ';
         connection.query(query, [postid, usernick], (err, data) => {
-          if (err) res.status(500).send({
-            message: ' query error : ' + err
-          });
+          if (err) res.status(500).send({ message: ' query error : ' + err });
           else {
-            res.status(203).send({
-              message: ' delete success '
-            });
+            res.status(203).send({ message: 'success'});
           }
         });
       });
     });
 });
 
+router.post('/deletecheck', (req, res) => {
+  return new Promise((fulfill, reject) => {
+    pool.getConnection((err, connection) => {
+      if(err) reject(err);
+      else fulfill(connection);
+    });
+  })
+  .catch(err => {
+    res.status(500).send({ message: 'getConnection err : ' + err});
+  })
+  .then(connection => {
+    return new Promise((fulfill, reject) => {
+      let postid = req.body.post_id;
+      let usernick = req.body.user_nick;
+      let query = 'select count(*) as checking from Post where id = ? and user_nick = ? ';
+      connection.query(query, [postid, usernick], (err, data) =>{
+        if(err) reject([err, connection]);
+        else fulfill([data, connection]);
+      });
+      connection.release();
+    })
+    .catch(values => {
+      res.status(500).send({ message: ' select error : ' + values[0] });
+    })
+    .then(values =>{
+      if(values[0][0].checking === 0){
+        res.status(500).send({ message: 'deny' });
+      }
+      else{
+          res.status(203).send({ message: 'ok'});
+      }
+    });
+  });
+})
 
 module.exports = router;
