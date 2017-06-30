@@ -1,26 +1,3 @@
-const express = require('express');
-const router = express.Router();
-const aws = require('aws-sdk');
-const bodyParser = require('body-parser');
-const moment = require('moment');
-const fs = require('fs');
-aws.config.loadFromPath('./config/aws_config.json');
-const pool = require('../config/db_pool');
-const multer = require('multer');
-const multerS3 = require('multer-s3');
-//const bcrypt = require('bcrypt');
-const saltRounds = 10;
-const s3 = new aws.S3();
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'sjibk',
-    acl: 'public-read',
-    key: function(req, file, cb) {
-      cb(null, Date.now() + '.' + file.originalname.split('.').pop());
-    }
-  })
-});
 
 const jsonParser = bodyParser.json(); // create application/json parser
 

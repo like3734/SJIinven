@@ -1,25 +1,3 @@
-const express = require('express');
-const router = express.Router();
-const aws = require('aws-sdk');
-const bodyParser = require('body-parser');
-//const ejs = require('ejs');
-const fs = require('fs');
-const moment = require('moment');
-aws.config.loadFromPath('./config/aws_config.json');
-const pool = require('../config/db_pool');
-const multer = require('multer');
-const multerS3 = require('multer-s3');
-const s3 = new aws.S3();
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'sjibk',
-    acl: 'public-read',
-    key: function(req, file, cb) {
-      cb(null, Date.now() + '.' + file.originalname.split('.').pop());
-    }
-  })
-});
 
 // 메인 list 띄워주기 + 최신순
 router.get('/partlatest/:user_nick/:part', function(req, res) {
@@ -33,7 +11,7 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
       let query = 'select User.level, User.nickname, User.profile, Post.id, Post.title, Post.contents, Post.likecount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.part = ? order by Post.id desc';
       let query2 = 'select post_id from PostLikeCount where user_nick = ? ';
       let query3 = 'select post_id from FavoritePost where user_nick = ? ';
-      let query4 = 'select post_id, user_nick, content, image from Comment order by id desc';
+      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, User.profile from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
       connection.query(query, userpart, function(err, data) {
         let ary_postinfo = [];
         for (var a in data) {
@@ -134,7 +112,7 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
                     let commentinfo = {
                       user_nick: data4[c].user_nick,
                       content: data4[c].content,
-                      image: data4[c].image
+                      image: data4[c].profile
                     };
                     ary_commentinfo[b][count] = commentinfo;
                     count++;
@@ -170,7 +148,7 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
       let query = 'select User.level, User.nickname, User.profile, Post.id, Post.title, Post.contents, Post.likecount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.part = ? order by Post.likecount desc';
       let query2 = 'select post_id from PostLikeCount where user_nick = ? ';
       let query3 = 'select post_id from FavoritePost where user_nick = ? ';
-      let query4 = 'select post_id, user_nick, content, image from Comment order by id desc';
+      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, User.profile from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
       connection.query(query, userpart, function(err, data) {
         let ary_postinfo = [];
         for (var a in data) {
@@ -271,7 +249,7 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
                     let commentinfo = {
                       user_nick: data4[c].user_nick,
                       content: data4[c].content,
-                      image: data4[c].image
+                      image: data4[c].profile
                     };
                     ary_commentinfo[b][count] = commentinfo;
                     count++;
@@ -307,7 +285,7 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
       let query = 'select User.level, User.nickname, User.profile, Post.id, Post.title, Post.contents, Post.likecount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.category = ? order by Post.id desc';
       let query2 = 'select post_id from PostLikeCount where user_nick = ? ';
       let query3 = 'select post_id from FavoritePost where user_nick = ? ';
-      let query4 = 'select post_id, user_nick, content, image from Comment order by id desc';
+      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, User.profile from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
       connection.query(query, category, function(err, data) {
         let ary_postinfo = [];
         for (var a in data) {
@@ -408,7 +386,7 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
                     let commentinfo = {
                       user_nick: data4[c].user_nick,
                       content: data4[c].content,
-                      image: data4[c].image
+                      image: data4[c].profile
                     };
                     ary_commentinfo[b][count] = commentinfo;
                     count++;
@@ -444,7 +422,7 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
       let query = 'select User.level, User.nickname, User.profile, Post.id, Post.title, Post.contents, Post.likecount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.category = ? order by Post.likecount desc';
       let query2 = 'select post_id from PostLikeCount where user_nick = ? ';
       let query3 = 'select post_id from FavoritePost where user_nick = ? ';
-      let query4 = 'select post_id, user_nick, content, image from Comment order by id desc';
+      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, User.profile from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
       connection.query(query, category, function(err, data) {
         let ary_postinfo = [];
         for (var a in data) {
@@ -545,7 +523,7 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
                     let commentinfo = {
                       user_nick: data4[c].user_nick,
                       content: data4[c].content,
-                      image: data4[c].image
+                      image: data4[c].profile
                     };
                     ary_commentinfo[b][count] = commentinfo;
                     count++;
@@ -822,25 +800,19 @@ router.post('/find', (req, res) => {
       });
     })
     .catch(err => {
-      res.status(500).send({
-        result: [],
-        message: 'getConnection error : ' + err
-      });
+      res.status(500).send({ result: [], message: 'getConnection error : ' + err });
     })
     .then(connection => {
       return new Promise((fulfill, reject) => {
-        //let query = 'select post.user_nick,post.title from post where post.title LIKE "%"?"%"';
-        //let userid = req.params.user_nick;
-        let query = 'select user_nick, title from Post where title LIKE "%"?"%" and part=?';
+        let query = 'select user_nick, title, id from Post where title LIKE "%"?"%" and part=?';
         connection.query(query, [req.body.search_content, req.body.part], (err, data) => {
           if (err) res.status(500).send({
             result: [],
             message: 'selecting user error: ' + err
           });
-          else res.status(200).send({
-            result: data,
-            message: 'ok'
-          });
+          else {
+            res.status(200).send({ result: data, message: 'ok' });
+          }
           connection.release();
         });
 
@@ -875,6 +847,7 @@ router.post('/delete', (req, res) => {
     });
 });
 
+// 게시글 삭제 유효성 검사
 router.post('/deletecheck', (req, res) => {
   return new Promise((fulfill, reject) => {
     pool.getConnection((err, connection) => {

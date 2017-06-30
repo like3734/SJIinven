@@ -1,27 +1,4 @@
-const express = require('express');
-const router = express.Router();
-const aws = require('aws-sdk');
-const moment = require('moment');
-const bodyParser = require('body-parser');
-//const ejs = require('ejs');
-const fs = require('fs');
-aws.config.loadFromPath('./config/aws_config.json');
-const pool = require('../config/db_pool');
-const multer = require('multer');
-const multerS3 = require('multer-s3');
-//const bcrypt = require('bcrypt');
-var userid;
-const s3 = new aws.S3();
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'sjibk',
-    acl: 'public-read',
-    key: function(req, file, cb) {
-      cb(null, Date.now() + '.' + file.originalname.split('.').pop());
-    }
-  })
-});
+
 
 
 // 마이페이지 화면 들어갔을 때 100%
@@ -36,7 +13,7 @@ router.get('/:user_nick', (req, res) => {
   .then(connection => {
     return new Promise((fulfill, reject) => {
       let query = 'select User.level,User.profile,User.nickname,User.statemessage,User.part from User where User.nickname=?';
-      let query2 = 'select Post.title,Post.written_time from User,Post where User.nickname=? and User.nickname=Post.user_nick order by Post.written_time desc';
+      let query2 = 'select Post.title,Post.written_time,Post.id from User,Post where User.nickname=? and User.nickname=Post.user_nick order by Post.written_time desc';
       connection.query(query,[req.params.user_nick],(err, data) => {
           if(err) res.status(500).send({ message: 'selecting user error: '+err });
           else {
@@ -66,7 +43,7 @@ router.get('/write/:user_nick', (req, res) => {
   })
   .catch(err => { res.status(500).send({ result: [], message: 'getConnection error : '+err}); })
   .then(connection => {
-      let query = 'select Post.title,Post.written_time from User,Post where User.nickname=? and User.nickname=Post.user_nick order by Post.written_time desc';
+      let query = 'select Post.title,Post.written_time,Post.id from User,Post where User.nickname=? and User.nickname=Post.user_nick order by Post.written_time desc';
       return new Promise((fulfill, reject) => {
       connection.query(query,[req.params.user_nick],(err, data) => {
           if(err) res.status(500).send({ result: [], message: 'selecting user error: '+err });
@@ -87,7 +64,7 @@ router.get('/like/:user_nick', (req, res) => {
   })
   .catch(err => { res.status(500).send({ result: [], message: 'getConnection error : '+err}); })
   .then(connection => {
-      let query = 'select Post.title,Post.written_time from User,FavoritePost,Post where User.nickname=? and User.nickname=FavoritePost.user_nick and FavoritePost.post_id=Post.id order by Post.id desc';
+      let query = 'select Post.title,Post.written_time,Post.id from User,FavoritePost,Post where User.nickname=? and User.nickname=FavoritePost.user_nick and FavoritePost.post_id=Post.id order by Post.id desc';
       return new Promise((fulfill, reject) => {
       connection.query(query,[req.params.user_nick],(err, data) => {
           if(err) res.status(500).send({ result: [], message: 'selecting user error: '+err });
@@ -98,12 +75,12 @@ router.get('/like/:user_nick', (req, res) => {
   })
 });
 
-// 개인정보 수정 99% [ 이미지 후...]
-router.put('/:user_nick', upload.single('image'), function(req, res) {
+// 개인정보 수정 100%
+router.post('/edit', upload.single('image'), function(req, res) {
   pool.getConnection(function(err, connection) {
     if (err) console.log('getConnection err: ', err);
     else {
-      let userNick = req.params.user_nick;
+      let userNick = req.body.user_nick;
       let query = 'update User set ? where nickname=?'; //query 순서중요. record 객체 아래에 query하면 imageurl 재대로 안넘어감
       let imageUrl;
       if (!req.file) imageUrl = null;
