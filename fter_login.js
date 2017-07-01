@@ -1,6 +1,4 @@
 
-const jsonParser = bodyParser.json(); // create application/json parser
-
 //페북,카카오 연동 로그인
 router.post('/', function(req, res) {
   return new Promise((fulfill, reject) => {
@@ -45,19 +43,19 @@ router.post('/', function(req, res) {
               let record = { id: comid };
               values[2].query(query3, record, (err,data3) => {
                 if(err) res.status(500).send({ result: [], message: 'failed : ' + err});
-                else res.status(201).send({ result: [], message: 'new'});
+                else{ res.status(201).send({ result: [ { nickname: null, part: null } ], message: 'new'}); }
               });
             }
-            else res.status(201).send({ result: [], message: 'new' });
-            values[2].release();
+            else{ res.status(201).send({ result: [ { nickname: null, part: null } ], message: 'new' }); }
           }
+          values[2].release();
         });
       }
       else {
         let query4 = 'select nickname, part from User where userid = ? ';
         values[2].query(query4, comid, (err, data) =>{
           if(err) res.status(500).send({ result: [], message: 'data failed : ' + err});
-          res.status(201).send({ result: data , message: 'old' });
+          else res.status(201).send({ result: data , message: 'old' });
           values[2].release();
         });
       }
@@ -82,8 +80,8 @@ router.post('/nickcheck', function(req, res) {
         connection.query(query, nick, function(err, data) {
           if (err) reject([err, connection]);
           else fulfill([data, connection]);
+          connection.release();
         });
-        connection.release();
       });
     })
     .catch(values => {
@@ -117,8 +115,10 @@ router.post('/profile', upload.single('image'), function(req, res) {
 
     .then((connection) => {
       return new Promise((fulfill, reject) => {
-        if (!(req.body.nickname && req.body.part))
+        if (!(req.body.nickname && req.body.part)){
           res.status(403).send({ message: 'please input all of nickname, part.' });
+          connection.release();
+        }
         else {
           let query = 'insert into User set ?' ; //3. 포스트 테이블에 게시글 저장
           let imageUri;

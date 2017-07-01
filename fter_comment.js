@@ -1,6 +1,4 @@
 
-const jsonParser = bodyParser.json(); // create application/json parser
-
 // 댓글 모두보기(+시간 계산 포함)
 router.get('/:post_id' , (req,res) => {
   return new Promise((fulfill, reject) => {
@@ -62,8 +60,7 @@ router.get('/:post_id' , (req,res) => {
   })
 });
 
-
-// 댓글 작성한 뒤 '전송'눌렀을 시
+// 댓글 작성한 뒤 '전송'눌렀을 시 (+알람)
 router.post('/add', (req, res) => {
   return new Promise((fulfill, reject) => {
     pool.getConnection((err, connection) => {
@@ -83,12 +80,33 @@ router.post('/add', (req, res) => {
         written_time : moment(new Date()).format('YYYY-MM-DD, HH:mm') // 게시글은 YY/MM/DD고 댓글은 분단위로 해줘야함
       };
       connection.query(query,record,(err, data) => {
-          if(err) res.status(500).send({ message: 'selecting user error: '+err });
+          if(err) res.status(500).send({ message: 'comment posting fail: '+err });
           else{
-            res.status(200).send({ message: 'ok' });
+            console.log("댓글에 insert는 완료");
+             let query2 = 'update Post set commentcount=commentcount+1 where id=?';
+             connection.query(query2, req.body.post_id, (err, data2) => {
+               if(err) res.status(500).send({ message: 'commentcount plus err : ' + err});
+               else{
+                 let query3 = 'select Post.user_nick, Comment.id from Post,Comment where Post.id = ? and Post.id = Comment.post_id order by Comment.id desc ';
+                 connection.query(query3, req.body.post_id, (err, data3)=> {
+                   if(err) res.status(500).send({ message: 'selecting err : ' + err});
+                   else{
+                     let query4 = 'insert into Alarm set ?';
+                     let alarminfo = {
+                       user_nick: data3[0].user_nick,
+                       comment_id: data3[0].id
+                     };
+                     connection.query(query4, alarminfo, (err,data4) =>{
+                       if(err) res.status(500).send({ message: 'insert alarminfo err : ' + err});
+                       else res.status(203).send({ message: 'ok' });
+                       connection.release();
+                     });
+                   }
+                 });
+               }
+             });
           }
-          connection.release();
-        });
+      });
     });
   })
 });
