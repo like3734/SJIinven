@@ -1,5 +1,4 @@
 
-
 // 메인 list 띄워주기 + 최신순
 router.get('/partlatest/:user_nick/:part', function(req, res) {
   pool.getConnection((err, connection) => {
@@ -9,10 +8,10 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
     else {
       let userpart = req.params.part;
       let usernick = req.params.user_nick;
-      let query = 'select User.part, User.level, User.nickname, User.profile, Post.id, Post.title, Post.contents, Post.likecount, Post.commentcount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.part = ? order by Post.id desc';
+      let query = 'select User.part, User.level, User.nickname, User.profile, User.statemessage, Post.id, Post.title, Post.contents, Post.likecount, Post.commentcount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.part = ? order by Post.id desc';
       let query2 = 'select post_id from PostLikeCount where user_nick = ? ';
       let query3 = 'select post_id from FavoritePost where user_nick = ? ';
-      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, User.profile from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
+      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, Comment.written_time, User.profile, User.level, User.statemessage from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
       connection.query(query, userpart, function(err, data) {
         if(err) res.status(500).send({ result: [], message: 'query error : ' + err});
         else{
@@ -23,6 +22,7 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
             level: data[a].level,
             nickname: data[a].nickname,
             profile: data[a].profile,
+            statemessage: data[a].statemessage,
             id: data[a].id,
             user_nick: data[a].user_nick,
             title: data[a].title,
@@ -57,6 +57,7 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
               level: ary_postinfo[c].level,
               nickname: ary_postinfo[c].nickname,
               profile: ary_postinfo[c].profile,
+              statemessage: ary_postinfo[c].statemessage,
               id: ary_postinfo[c].id,
               user_nick: ary_postinfo[c].user_nick,
               title: ary_postinfo[c].title,
@@ -78,6 +79,10 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
             else{
             let markunmark = [];
             let getallinfo = [];
+            let ary_image = [];
+            for(let idx=0; idx<allinfo.length; idx++){
+              ary_image[idx] = new Array();
+            }
             for (var b in allinfo) {
               markunmark[b] = 0;
               for (var c in data3) {
@@ -87,27 +92,32 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
               }
             }
             for (var c in allinfo) {
+              ary_image[c].push(allinfo[c].image0);
+              ary_image[c].push(allinfo[c].image1);
+              ary_image[c].push(allinfo[c].image2);
+              ary_image[c].push(allinfo[c].image3);
+              ary_image[c].push(allinfo[c].image4);
+            }
+            for( var e in allinfo) {
               let info = {
-                part: allinfo[c].part,
-                level: allinfo[c].level,
-                nickname: allinfo[c].nickname,
-                profile: allinfo[c].profile,
-                id: allinfo[c].id,
-                user_nick: allinfo[c].user_nick,
-                title: allinfo[c].title,
-                contents: allinfo[c].contents,
-                likecount: allinfo[c].likecount,
-                commentcount: allinfo[c].commentcount,
-                written_time: allinfo[c].written_time,
-                image0: allinfo[c].image0,
-                image1: allinfo[c].image1,
-                image2: allinfo[c].image2,
-                image3: allinfo[c].image3,
-                image4: allinfo[c].image4,
-                likecheck: allinfo[c].likecheck,
-                markcheck: markunmark[c]
+                part: allinfo[e].part,
+                level: allinfo[e].level,
+                nickname: allinfo[e].nickname,
+                profile: allinfo[e].profile,
+                statemessage: allinfo[e].statemessage,
+                id: allinfo[e].id,
+                user_nick: allinfo[e].user_nick,
+                title: allinfo[e].title,
+                contents: allinfo[e].contents,
+                likecount: allinfo[e].likecount,
+                commentcount: allinfo[e].commentcount,
+                written_time: allinfo[e].written_time,
+                likecheck: allinfo[e].likecheck,
+                markcheck: markunmark[e],
+                image: ary_image[e]
               };
               getallinfo.push(info);
+
             }
             connection.query(query4, getallinfo, function(err, data4) {
               if(err) res.status(500).send({ result: [], message: ' query4 error : ' + err});
@@ -127,7 +137,10 @@ router.get('/partlatest/:user_nick/:part', function(req, res) {
                     let commentinfo = {
                       user_nick: data4[c].user_nick,
                       content: data4[c].content,
-                      image: data4[c].profile
+                      image: data4[c].profile,
+                      level: data4[c].level,
+                      written_time: data4[c].written_time,
+                      statemessage: data4[c].statemessage
                     };
                     ary_commentinfo[b][count] = commentinfo;
                     count++;
@@ -167,10 +180,10 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
     else {
       let userpart = req.params.part;
       let usernick = req.params.user_nick;
-      let query = 'select User.part, User.level, User.nickname, User.profile, Post.id, Post.title, Post.contents, Post.likecount, Post.commentcount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.part = ? order by Post.likecount desc';
+      let query = 'select User.part, User.level, User.nickname, User.profile, User.statemessage, Post.id, Post.title, Post.contents, Post.likecount, Post.commentcount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.part = ? order by Post.likecount desc';
       let query2 = 'select post_id from PostLikeCount where user_nick = ? ';
       let query3 = 'select post_id from FavoritePost where user_nick = ? ';
-      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, User.profile from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
+      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, Comment.written_time, User.profile, User.level, User.statemessage from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
       connection.query(query, userpart, function(err, data) {
         if(err) res.status(500).send({ result: [], message: 'query error : ' + err});
         else{
@@ -181,6 +194,7 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
             level: data[a].level,
             nickname: data[a].nickname,
             profile: data[a].profile,
+            statemessage: data[a].statemessage,
             id: data[a].id,
             user_nick: data[a].user_nick,
             title: data[a].title,
@@ -215,6 +229,7 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
               level: ary_postinfo[c].level,
               nickname: ary_postinfo[c].nickname,
               profile: ary_postinfo[c].profile,
+              statemessage: ary_postinfo[c].statemessage,
               id: ary_postinfo[c].id,
               user_nick: ary_postinfo[c].user_nick,
               title: ary_postinfo[c].title,
@@ -236,6 +251,10 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
             else{
             let markunmark = [];
             let getallinfo = [];
+            let ary_image = [];
+            for(let idx=0; idx<allinfo.length; idx++){
+              ary_image[idx] = new Array();
+            }
             for (var b in allinfo) {
               markunmark[b] = 0;
               for (var c in data3) {
@@ -245,27 +264,32 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
               }
             }
             for (var c in allinfo) {
+              ary_image[c].push(allinfo[c].image0);
+              ary_image[c].push(allinfo[c].image1);
+              ary_image[c].push(allinfo[c].image2);
+              ary_image[c].push(allinfo[c].image3);
+              ary_image[c].push(allinfo[c].image4);
+            }
+            for( var e in allinfo) {
               let info = {
-                part: allinfo[c].part,
-                level: allinfo[c].level,
-                nickname: allinfo[c].nickname,
-                profile: allinfo[c].profile,
-                id: allinfo[c].id,
-                user_nick: allinfo[c].user_nick,
-                title: allinfo[c].title,
-                contents: allinfo[c].contents,
-                likecount: allinfo[c].likecount,
-                commentcount: allinfo[c].commentcount,
-                written_time: allinfo[c].written_time,
-                image0: allinfo[c].image0,
-                image1: allinfo[c].image1,
-                image2: allinfo[c].image2,
-                image3: allinfo[c].image3,
-                image4: allinfo[c].image4,
-                likecheck: allinfo[c].likecheck,
-                markcheck: markunmark[c]
+                part: allinfo[e].part,
+                level: allinfo[e].level,
+                nickname: allinfo[e].nickname,
+                profile: allinfo[e].profile,
+                statemessage: allinfo[e].statemessage,
+                id: allinfo[e].id,
+                user_nick: allinfo[e].user_nick,
+                title: allinfo[e].title,
+                contents: allinfo[e].contents,
+                likecount: allinfo[e].likecount,
+                commentcount: allinfo[e].commentcount,
+                written_time: allinfo[e].written_time,
+                likecheck: allinfo[e].likecheck,
+                markcheck: markunmark[e],
+                image: ary_image[e]
               };
               getallinfo.push(info);
+
             }
             connection.query(query4, getallinfo, function(err, data4) {
               if(err) res.status(500).send({ result: [], message: 'query4 error : ' + err});
@@ -285,7 +309,10 @@ router.get('/partpopular/:user_nick/:part', function(req, res) {
                     let commentinfo = {
                       user_nick: data4[c].user_nick,
                       content: data4[c].content,
-                      image: data4[c].profile
+                      image: data4[c].profile,
+                      level: data4[c].level,
+                      written_time: data4[c].written_time,
+                      statemessage: data4[c].statemessage
                     };
                     ary_commentinfo[b][count] = commentinfo;
                     count++;
@@ -325,10 +352,10 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
     else {
       let category = req.params.category;
       let usernick = req.params.user_nick;
-      let query = 'select User.part, User.level, User.nickname, User.profile, Post.id, Post.title, Post.contents, Post.likecount, Post.commentcount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.category = ? order by Post.id desc';
+      let query = 'select User.part, User.level, User.nickname, User.profile, User.statemessage, Post.id, Post.title, Post.contents, Post.likecount, Post.commentcount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.category = ? order by Post.id desc';
       let query2 = 'select post_id from PostLikeCount where user_nick = ? ';
       let query3 = 'select post_id from FavoritePost where user_nick = ? ';
-      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, User.profile from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
+      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, Comment.written_time, User.profile, User.level, User.statemessage from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
       connection.query(query, category, function(err, data) {
         if(err) res.status(500).send({ result: [], message: 'query error : ' + err});
         else{
@@ -339,6 +366,7 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
             level: data[a].level,
             nickname: data[a].nickname,
             profile: data[a].profile,
+            statemessage: data[a].statemessage,
             id: data[a].id,
             user_nick: data[a].user_nick,
             title: data[a].title,
@@ -373,6 +401,7 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
               level: ary_postinfo[c].level,
               nickname: ary_postinfo[c].nickname,
               profile: ary_postinfo[c].profile,
+              statemessage: ary_postinfo[c].statemessage,
               id: ary_postinfo[c].id,
               user_nick: ary_postinfo[c].user_nick,
               title: ary_postinfo[c].title,
@@ -394,6 +423,10 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
             else{
             let markunmark = [];
             let getallinfo = [];
+            let ary_image = [];
+            for(let idx=0; idx<allinfo.length; idx++){
+              ary_image[idx] = new Array();
+            }
             for (var b in allinfo) {
               markunmark[b] = 0;
               for (var c in data3) {
@@ -403,27 +436,32 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
               }
             }
             for (var c in allinfo) {
+              ary_image[c].push(allinfo[c].image0);
+              ary_image[c].push(allinfo[c].image1);
+              ary_image[c].push(allinfo[c].image2);
+              ary_image[c].push(allinfo[c].image3);
+              ary_image[c].push(allinfo[c].image4);
+            }
+            for( var e in allinfo) {
               let info = {
-                part: allinfo[c].part,
-                level: allinfo[c].level,
-                nickname: allinfo[c].nickname,
-                profile: allinfo[c].profile,
-                id: allinfo[c].id,
-                user_nick: allinfo[c].user_nick,
-                title: allinfo[c].title,
-                contents: allinfo[c].contents,
-                likecount: allinfo[c].likecount,
-                commentcount: allinfo[c].commentcount,
-                written_time: allinfo[c].written_time,
-                image0: allinfo[c].image0,
-                image1: allinfo[c].image1,
-                image2: allinfo[c].image2,
-                image3: allinfo[c].image3,
-                image4: allinfo[c].image4,
-                likecheck: allinfo[c].likecheck,
-                markcheck: markunmark[c]
+                part: allinfo[e].part,
+                level: allinfo[e].level,
+                nickname: allinfo[e].nickname,
+                profile: allinfo[e].profile,
+                statemessage: allinfo[e].statemessage,
+                id: allinfo[e].id,
+                user_nick: allinfo[e].user_nick,
+                title: allinfo[e].title,
+                contents: allinfo[e].contents,
+                likecount: allinfo[e].likecount,
+                commentcount: allinfo[e].commentcount,
+                written_time: allinfo[e].written_time,
+                likecheck: allinfo[e].likecheck,
+                markcheck: markunmark[e],
+                image: ary_image[e]
               };
               getallinfo.push(info);
+
             }
             connection.query(query4, getallinfo, function(err, data4) {
               if(err) res.status(500).send({ result: [], message: 'query4 error : ' + err});
@@ -443,7 +481,10 @@ router.get('/categorylatest/:user_nick/:category', function(req, res) {
                     let commentinfo = {
                       user_nick: data4[c].user_nick,
                       content: data4[c].content,
-                      image: data4[c].profile
+                      image: data4[c].profile,
+                      level: data4[c].level,
+                      written_time: data4[c].written_time,
+                      statemessage: data4[c].statemessage
                     };
                     ary_commentinfo[b][count] = commentinfo;
                     count++;
@@ -483,10 +524,10 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
     else {
       let category = req.params.category;
       let usernick = req.params.user_nick;
-      let query = 'select User.part, User.level, User.nickname, User.profile, Post.id, Post.title, Post.contents, Post.likecount, Post.commentcount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.category = ? order by Post.likecount desc';
+      let query = 'select User.part, User.level, User.nickname, User.profile, User.statemessage, Post.id, Post.title, Post.contents, Post.likecount, Post.commentcount, Post.written_time, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5 from User, Post where User.nickname = Post.user_nick and Post.category = ? order by Post.likecount desc';
       let query2 = 'select post_id from PostLikeCount where user_nick = ? ';
       let query3 = 'select post_id from FavoritePost where user_nick = ? ';
-      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, User.profile from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
+      let query4 = 'select Comment.post_id, Comment.user_nick, Comment.content, Comment.written_time, User.profile, User.level, User.statemessage from User, Comment where User.nickname = Comment.user_nick order by Comment.id desc';
       connection.query(query, category, function(err, data) {
         if(err) res.status(500).send({ result: [], message: 'query4 error : ' + err});
         else{
@@ -497,6 +538,7 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
             level: data[a].level,
             nickname: data[a].nickname,
             profile: data[a].profile,
+            statemessage: data[a].statemessage,
             id: data[a].id,
             user_nick: data[a].user_nick,
             title: data[a].title,
@@ -531,6 +573,7 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
               level: ary_postinfo[c].level,
               nickname: ary_postinfo[c].nickname,
               profile: ary_postinfo[c].profile,
+              statemessage: ary_postinfo[c].statemessage,
               id: ary_postinfo[c].id,
               user_nick: ary_postinfo[c].user_nick,
               title: ary_postinfo[c].title,
@@ -552,6 +595,10 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
             else{
             let markunmark = [];
             let getallinfo = [];
+            let ary_image = [];
+            for(let idx=0; idx<allinfo.length; idx++){
+              ary_image[idx] = new Array();
+            }
             for (var b in allinfo) {
               markunmark[b] = 0;
               for (var c in data3) {
@@ -561,27 +608,32 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
               }
             }
             for (var c in allinfo) {
+              ary_image[c].push(allinfo[c].image0);
+              ary_image[c].push(allinfo[c].image1);
+              ary_image[c].push(allinfo[c].image2);
+              ary_image[c].push(allinfo[c].image3);
+              ary_image[c].push(allinfo[c].image4);
+            }
+            for( var e in allinfo) {
               let info = {
-                part: allinfo[c].part,
-                level: allinfo[c].level,
-                nickname: allinfo[c].nickname,
-                profile: allinfo[c].profile,
-                id: allinfo[c].id,
-                user_nick: allinfo[c].user_nick,
-                title: allinfo[c].title,
-                contents: allinfo[c].contents,
-                likecount: allinfo[c].likecount,
-                commentcount: allinfo[c].commentcount,
-                written_time: allinfo[c].written_time,
-                image0: allinfo[c].image0,
-                image1: allinfo[c].image1,
-                image2: allinfo[c].image2,
-                image3: allinfo[c].image3,
-                image4: allinfo[c].image4,
-                likecheck: allinfo[c].likecheck,
-                markcheck: markunmark[c]
+                part: allinfo[e].part,
+                level: allinfo[e].level,
+                nickname: allinfo[e].nickname,
+                profile: allinfo[e].profile,
+                statemessage: allinfo[e].statemessage,
+                id: allinfo[e].id,
+                user_nick: allinfo[e].user_nick,
+                title: allinfo[e].title,
+                contents: allinfo[e].contents,
+                likecount: allinfo[e].likecount,
+                commentcount: allinfo[e].commentcount,
+                written_time: allinfo[e].written_time,
+                likecheck: allinfo[e].likecheck,
+                markcheck: markunmark[e],
+                image: ary_image[e]
               };
               getallinfo.push(info);
+
             }
             connection.query(query4, getallinfo, function(err, data4) {
               if(err) res.status(500).send({ result: [], message: 'query4 error : ' + err});
@@ -601,16 +653,16 @@ router.get('/categorypopular/:user_nick/:category', function(req, res) {
                     let commentinfo = {
                       user_nick: data4[c].user_nick,
                       content: data4[c].content,
-                      image: data4[c].image
+                      image: data4[c].profile,
+                      level: data4[c].level,
+                      written_time: data4[c].written_time,
+                      statemessage: data4[c].statemessage
                     };
                     ary_commentinfo[b][count] = commentinfo;
                     count++;
                   };
                 }
               }
-              // for (var d in getallinfo) {
-              //   ary_allinfo[d] = [ getallinfo[d], ary_commentinfo[d] ];
-              // }
               for(var d in getallinfo) {
                 let allinfo = {
                   postinfo: getallinfo[d],
@@ -677,7 +729,8 @@ router.get('/postlike/:user_nick/:post_id', (req, res) => {
                   });
                 }
               });
-            } else { // 안좋아요!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            }
+            else { // 안좋아요!!!!!!!!!!!!!!!!!!!!!!!!!!!!
               let query5 = 'delete from PostLikeCount where user_nick=? and post_id=?';
               connection.query(query5, [req.params.user_nick, req.params.post_id], (err, data) => {
                 if (err) res.status(500).send({ result: [], message: 'fourth error: ' + err });
@@ -834,10 +887,10 @@ router.post('/post', (req, res) => {
     else{
         let postid = req.body.post_id;
         let nickname = req.body.user_nick;
-        let query = ' select User.nickname, User.level, User.part as userpart , User.profile, Post.title, Post.contents, Post.written_time, Post.part as postpart, Post.category, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5, Post.likecount, Post.commentcount from User, Post where Post.id = ? ';
+        let query = ' select User.nickname, User.level, User.part as userpart , User.profile, User.statemessage, Post.title, Post.contents, Post.written_time, Post.part as postpart, Post.category, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5, Post.likecount, Post.commentcount from User, Post where User.nickname = Post.user_nick and Post.id = ? ';
         let query2 = 'select post_id from PostLikeCount where user_nick = ? ';
         let query3 = 'select post_id from FavoritePost where user_nick = ? ';
-        let query4 = ' select user_nick, content, image, written_time from Comment where post_id = ? order by id desc';
+        let query4 = ' select Comment.user_nick, Comment.content, User.profile, Comment.written_time, User.level, User.part, User.statemessage from Comment, User where post_id = ? and Comment.user_nick = User.nickname order by Comment.id desc';
         connection.query(query, postid, (err, data)=> {
           if(err) res.status(500).send({ result: [], message: 'query error : ' + err});
           else{
@@ -854,6 +907,7 @@ router.post('/post', (req, res) => {
             connection.query(query3, [nickname, data, likecheck], (err, data3) => {
               if(err) res.status(500).send({ result: [], message: 'query3 error : ' + err});
               else{
+                ary_image = [];
                 let markcheck = 0;
                 for(let a=0; a< data3.length ; a++){
                   let id = data3[a].post_id;
@@ -861,25 +915,28 @@ router.post('/post', (req, res) => {
                     markcheck = 1;
                   }
                 }
+                ary_image.push(data[0].image1);
+                ary_image.push(data[0].image2);
+                ary_image.push(data[0].image3);
+                ary_image.push(data[0].image4);
+                ary_image.push(data[0].image5);
+
                 let postinfo = {
                   nickname: data[0].nickname,
                   level: data[0].level,
                   userpart: data[0].userpart,
                   profile: data[0].profile,
+                  statemessage: data[0].statemessage,
                   title: data[0].title,
                   contents: data[0].contents,
                   written_time: data[0].written_time,
                   postpart: data[0].postpart,
                   category: data[0].category,
-                  image0: data[0].image1,
-                  image1: data[0].image2,
-                  image2: data[0].image3,
-                  image3: data[0].image4,
-                  image4: data[0].image5,
                   likecount: data[0].likecount,
                   commentcount: data[0].commentcount,
                   likecheck: likecheck,
-                  markcheck: markcheck
+                  markcheck: markcheck,
+                  image: ary_image
                 };
                 connection.query(query4, [postid, postinfo], (err, data4) => {
                   if (err) res.status(500).send({ result: [], message: 'fail' });
@@ -998,15 +1055,5 @@ router.post('/deletecheck', (req, res) => {
   });
 })
 
-// 사진 크게보기
-router.get('/imageview/:post_id', (req, res) => {
-    pool.getConnection((err, connection) => {
-      let query = 'select image1b, image2b, image3b, image4b, image5b from Post where Post.id = ?';
-      connection.query(query, req.params.post_id, (err,data) => {
-        if(err) res.status(500).send({ result: [], message: 'query err : ' + err});
-        else res.status(203).send({ result: data, message: 'ok'});
-      });
-  });
-})
 
 module.exports = router;

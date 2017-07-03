@@ -1,4 +1,6 @@
 
+
+
 // // 마이페이지 화면 들어갔을 때 100% 사용자가 쓴 글까지 함께
 // router.get('/:user_nick', (req, res) => {
 //   return new Promise((fulfill, reject) => {
@@ -60,6 +62,7 @@ router.get('/:user_nick', (req, res) => {
         connection.query(query, [req.params.user_nick], (err, data) => {
           if (err) res.status(500).send({ message: 'selecting user error: ' + err });
           else {
+            console.log(data);
             let lecord = {
               level: data[0].level,
               profile: data[0].profile,
@@ -139,7 +142,7 @@ router.get('/like/:user_nick', (req, res) => {
     })
 });
 
-// 개인정보 수정 100%
+// 개인정보 수정 100% 이미지 한장
 router.post('/edit', upload.single('image'), function(req, res) {
   pool.getConnection(function(err, connection) {
     if (err) console.log('getConnection err: ', err);
@@ -167,5 +170,32 @@ router.post('/edit', upload.single('image'), function(req, res) {
     }
   });
 });
+
+// // 개인정보 수정 100% 이미지 두장
+// router.post('/edit', upload.array('image', 2), function(req, res) {
+//   pool.getConnection(function(err, connection) {
+//     if (err) console.log('getConnection err: ', err);
+//     else {
+//       let userNick = req.body.user_nick;
+//       let query = 'update User set ? where nickname=?'; //query 순서중요. record 객체 아래에 query하면 imageurl 재대로 안넘어감
+//
+//       let record = {
+//         nickname: req.body.nickname,
+//         part: req.body.part,
+//         statemessage: req.body.statemessage,
+//         profile: req.files[0] ? req.files[0].location : null,
+//         profileb: req.files[1] ? req.files[1].location : null
+//       };
+//
+//       connection.query(query, [record, userNick], function(err) {
+//         if (err) console.log('inserting query err:', err);
+//         else res.status(201).send({
+//           message: 'update'
+//         });
+//         connection.release();
+//       });
+//     }
+//   });
+// });
 
 module.exports = router;
