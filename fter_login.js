@@ -1,4 +1,5 @@
 
+
 /////////////////////////////////// 암호화 x //////////////////////////////////
 // //페북,카카오 연동 로그인
 router.post('/', function(req, res) {
@@ -10,7 +11,7 @@ router.post('/', function(req, res) {
     })
     .catch(err => {
       res.status(500).send({
-        result: [],
+        result: {},
         message: 'getConnection error : ' + err
       });
     })
@@ -26,7 +27,7 @@ router.post('/', function(req, res) {
       });
     })
     .catch(values => {
-      res.status(403).send({ result: [], message: 'id check error' + values[0] });
+      res.status(403).send({ result: {}, message: 'id check error' + values[0] });
       values[1].release();
     })
     .then(values => {
@@ -34,7 +35,7 @@ router.post('/', function(req, res) {
       if(values[0].length === 0 ){
         let query2 = 'select count(*) as idcount from ID where id = ? ';
         values[2].query(query2, comid, (err, data2) =>{
-          if(err) res.status(500).send({ result: [], message: 'id select error : ' + err});
+          if(err) res.status(500).send({ result: {}, message: 'id select error : ' + err});
           else{
             console.log(data2);
             console.log(data2[0].idcount);
@@ -42,11 +43,11 @@ router.post('/', function(req, res) {
               let query3 = 'insert into ID set ? ';
               let record = { id: comid };
               values[2].query(query3, record, (err,data3) => {
-                if(err) res.status(500).send({ result: [], message: 'failed : ' + err});
-                else{ res.status(201).send({ result: [ ], message: 'new'}); }
+                if(err) res.status(500).send({ result: {}, message: 'failed : ' + err});
+                else{ res.status(201).send({ result: {}, message: 'new'}); }
               });
             }
-            else{ res.status(201).send({ result: [ ], message: 'new' }); }
+            else{ res.status(201).send({ result: {}, message: 'new' }); }
           }
           values[2].release();
         });
@@ -54,8 +55,14 @@ router.post('/', function(req, res) {
       else {
         let query4 = 'select nickname, part from User where userid = ? ';
         values[2].query(query4, comid, (err, data) =>{
-          if(err) res.status(500).send({ result: [], message: 'data failed : ' + err});
-          else res.status(201).send({ result: data , message: 'old' });
+          if(err) res.status(500).send({ result: {}, message: 'data failed : ' + err});
+          else{
+            let userinfo = {
+              nickname: data[0].nickname,
+              part: data[0].part
+            };
+            res.status(201).send({ result: userinfo , message: 'old' });
+          }
           values[2].release();
         });
       }
@@ -112,6 +119,7 @@ router.post('/profile', upload.single('image'), function(req, res) {
     })
     .then((connection) => {
           let query = 'insert into User set ?' ; //3. 포스트 테이블에 게시글 저장
+          console.log(req.file);
           let record = {
             userid: req.body.id,
             nickname: req.body.nickname,

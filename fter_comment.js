@@ -1,4 +1,5 @@
 
+
 // 댓글 모두보기(+시간 계산 포함)
 router.get('/:post_id' , (req,res) => {
   return new Promise((fulfill, reject) => {
@@ -23,7 +24,7 @@ router.get('/:post_id' , (req,res) => {
             for(var i=0;i<data.length;i++){
               written_time[i] =  data[i].written_time;
               if(moment(written_time[i]).date() != now_time.getDate()){ // 같은 날이 아니면 그냥 날짜를 넣어줌
-                  written_time[i] = written_time[i];
+                  written_time[i] =  moment(written_time[i]).format('YYYY-MM-DD');
               }
               else{
                 if(moment(written_time[i]).hours()==now_time.getHours()){ // 같은 날이고 시각도 같다면
@@ -173,7 +174,7 @@ router.get('/useful/:postid' , (req,res) => {
             for(var i=0;i<data.length;i++){
               written_time[i] =  data[i].written_time;
               if(moment(written_time[i]).date() != now_time.getDate()){ // 같은 날이 아니면 그냥 날짜를 넣어줌
-                  written_time[i] = written_time[i];
+                  written_time[i] = moment(written_time[i]).format('YYYY-MM-DD');
               }
               else{
                 if(moment(written_time[i]).hours()==now_time.getHours()){ // 같은 날이고 시각도 같다면

@@ -55,7 +55,7 @@ router.get('/:user_nick', function(req, res) {
                 for(var d in ary_alarminfo){
                   written_time[d] = ary_alarminfo[d].written_time;
                   if(moment(written_time[d]).date() !== now_time.getDate())
-                    written_time[d] = written_time[d];
+                    written_time[d] = moment(written_time[d]).format('YYYY-MM-DD');
                   else{
                     if(moment(written_time[d]).hours() === now_time.getHours()){
                       if(moment(written_time[d]).minutes() === now_time.getMinutes()){
@@ -144,7 +144,7 @@ router.post('/allcomment' , (req,res) => {
           for(var i=0;i<data.length;i++){
             written_time[i] =  data[i].written_time;
             if(moment(written_time[i]).date() != now_time.getDate()){ // 같은 날이 아니면 그냥 날짜를 넣어줌
-                written_time[i] = written_time[i];
+                written_time[i] = moment(written_time[i]).format('YYYY-MM-DD');
             }
             else{
               if(moment(written_time[i]).hours()==now_time.getHours()){ // 같은 날이고 시각도 같다면
