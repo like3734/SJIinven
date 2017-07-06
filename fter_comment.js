@@ -12,7 +12,7 @@ router.get('/:post_id' , (req,res) => {
   .then(connection => {
     return new Promise((fulfill, reject) => {
       let postid = req.params.post_id;
-      let query = 'select Comment.user_nick, User.profile, Comment.content, Comment.written_time from User,Comment where User.nickname=Comment.user_nick and Comment.post_id = ? order by Comment.id desc';
+      let query = 'select Comment.user_nick, User.profile, User.level, User.statemessage, Comment.content, Comment.written_time from User,Comment where User.nickname=Comment.user_nick and Comment.post_id = ? order by Comment.id desc';
         connection.query(query, postid, (err, data) => {
           if(err) res.status(500).send({ result: [], message: 'comment all fail: '+err });
           else{
@@ -37,16 +37,24 @@ router.get('/:post_id' , (req,res) => {
                   }
                 }
                 else{ // 같은 날이고 시각이 다르다면
-                  time_sub = now_time.getHours() - moment(written_time[i]).hours();
-                  written_time[i] = time_sub+"시간 전";
+                  time_sub = (now_time.getHours()*60 + now_time.getMinutes()) - ( moment(written_time[i]).hours()*60 + moment(written_time[i]).minutes());
+                  if(time_sub >= 60){ // 두 시각의 차이가 60분이 넘는다면
+                    time_sub = now_time.getHours() - moment(written_time[i]).hours();
+                    written_time[i] = time_sub+"시간 전";
+                  }
+                  else{ // 두 시각의 차이가 60분이 넘지 않는다면
+                    time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
+                    written_time[i] = time_sub+"분 전";
+                  }
                 }
               }
-              console.log(data[i].written_time);
             }
 
             for(var j=0;j<data.length;j++){
               record[j]={
                 user_nick: data[j].user_nick,
+                level: data[j].level,
+                statemessage: data[j].statemessage,
                 image: data[j].profile,
                 content: data[j].content,
                 written_time: written_time[j]
@@ -161,7 +169,7 @@ router.get('/useful/:postid' , (req,res) => {
   .then(connection => {
     return new Promise((fulfill, reject) => {
       let postid = req.params.postid;
-      let query = 'select Comment.user_nick, User.profile, Comment.content, Comment.written_time from User,Comment where User.nickname=Comment.user_nick and Comment.useful = 1 and Comment.post_id = ? order by Comment.id desc';
+      let query = 'select Comment.user_nick, User.profile, User.level, User.statemessage, Comment.content, Comment.written_time from User,Comment where User.nickname=Comment.user_nick and Comment.useful = 1 and Comment.post_id = ? order by Comment.id desc';
         connection.query(query, postid, (err, data) => {
           if(err) res.status(500).send({ result: [], message: 'comment all fail: '+err });
           else{
@@ -187,7 +195,7 @@ router.get('/useful/:postid' , (req,res) => {
                   }
                 }
                 else{ // 같은 날이고 시각이 다르다면
-                  time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
+                  time_sub = (now_time.getHours()*60 + now_time.getMinutes()) - ( moment(written_time[i]).hours()*60 + moment(written_time[i]).minutes());
                   if(time_sub >= 60){ // 두 시각의 차이가 60분이 넘는다면
                     time_sub = now_time.getHours() - moment(written_time[i]).hours();
                     written_time[i] = time_sub+"시간 전";
@@ -196,16 +204,16 @@ router.get('/useful/:postid' , (req,res) => {
                     time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
                     written_time[i] = time_sub+"분 전";
                   }
-
                 }
               }
-              console.log(data[i].written_time);
             }
 
             for(var j=0;j<data.length;j++){
               record[j]={
                 user_nick: data[j].user_nick,
-                profile: data[j].profile,
+                image: data[j].profile,
+                level: data[j].level,
+                statemessage: data[j].statemessage,
                 content: data[j].content,
                 written_time: written_time[j]
               };

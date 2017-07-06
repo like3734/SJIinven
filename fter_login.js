@@ -1,5 +1,6 @@
 
 
+
 /////////////////////////////////// 암호화 x //////////////////////////////////
 // //페북,카카오 연동 로그인
 router.post('/', function(req, res) {
@@ -92,7 +93,7 @@ router.post('/nickcheck', function(req, res) {
       });
     })
     .catch(values => {
-      console.log("selecting query error: ", values[0]);
+      res.status(500).send({ message: "selecting query err : " + values[0]});
     })
     .then(values => {
       if (values[0][0].nickcheck === 0) {// 검색결과 x

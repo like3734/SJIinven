@@ -149,17 +149,23 @@ router.post('/edit', upload.single('image'), function(req, res) {
     else {
       let userNick = req.body.user_nick;
       let query = 'update User set ? where nickname=?'; //query 순서중요. record 객체 아래에 query하면 imageurl 재대로 안넘어감
-      let imageUrl;
-      if (!req.file) imageUrl = null;
-      else imageUrl = req.file.location;
-
-      let record = {
-        nickname: req.body.nickname,
-        part: req.body.part,
-        statemessage: req.body.statemessage,
-        profile: imageUrl
-      };
-
+      console.log(req.file);
+      if(req.file == null){
+        var record = {
+          nickname: req.body.nickname,
+          part: req.body.part,
+          statemessage: req.body.statemessage
+        };
+      }
+      else{
+        var record = {
+          nickname: req.body.nickname,
+          part: req.body.part,
+          statemessage: req.body.statemessage,
+          profile: req.file ? req.file.location : null
+        };
+      }
+      console.log(record);
       connection.query(query, [record, userNick], function(err) {
         if (err) console.log('inserting query err:', err);
         else res.status(201).send({
@@ -171,31 +177,39 @@ router.post('/edit', upload.single('image'), function(req, res) {
   });
 });
 
-// // 개인정보 수정 100% 이미지 두장
-// router.post('/edit', upload.array('image', 2), function(req, res) {
-//   pool.getConnection(function(err, connection) {
-//     if (err) console.log('getConnection err: ', err);
-//     else {
-//       let userNick = req.body.user_nick;
-//       let query = 'update User set ? where nickname=?'; //query 순서중요. record 객체 아래에 query하면 imageurl 재대로 안넘어감
-//
-//       let record = {
-//         nickname: req.body.nickname,
-//         part: req.body.part,
-//         statemessage: req.body.statemessage,
-//         profile: req.files[0] ? req.files[0].location : null,
-//         profileb: req.files[1] ? req.files[1].location : null
-//       };
-//
-//       connection.query(query, [record, userNick], function(err) {
-//         if (err) console.log('inserting query err:', err);
-//         else res.status(201).send({
-//           message: 'update'
-//         });
-//         connection.release();
-//       });
-//     }
-//   });
-// });
+
+//닉네임 중복 검사
+router.post('/nickcheck', function(req, res) {
+  return new Promise((fulfill, reject) => {
+      pool.getConnection((err, connection) => {
+        if (err) reject(err);
+        else fulfill(connection);
+      })
+    })
+    .catch(err => {
+      res.status(500).send({ result: [], message: 'getConnection error :' + err});
+    })
+    .then((connection) => {
+      return new Promise((fulfill, reject) => {
+        let query = 'select count(*) as nickcheck from User where nickname = ? ';
+        connection.query(query, req.body.newnick, function(err, data) {
+          if (err) reject([err, connection]);
+          else fulfill([data, connection]);
+          connection.release();
+        });
+      });
+    })
+    .catch(values => {
+      res.status(500).send({ message: "selecting query error: " + values[0] });
+    })
+    .then(values => {
+      if ( req.body.oldnick == req.body.newnick || values[0][0].nickcheck === 0) {// 검색결과 x
+        res.status(201).send({ message: 'true' });
+      }
+      else {
+        res.status(201).send({ message: 'false' });
+      }
+    });
+})
 
 module.exports = router;

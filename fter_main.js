@@ -158,8 +158,15 @@ router.get('/partlatest/:user_nick/:part', (req, res) => {
               }
             }
             else{ // 같은 날이고 시각이 다르다면
-              time_sub = now_time.getHours() - moment(written_time[i]).hours();
-              written_time[i] = time_sub+"시간 전";
+              time_sub = (now_time.getHours()*60 + now_time.getMinutes()) - ( moment(written_time[i]).hours()*60 + moment(written_time[i]).minutes());
+              if(time_sub >= 60){ // 두 시각의 차이가 60분이 넘는다면
+                time_sub = now_time.getHours() - moment(written_time[i]).hours();
+                written_time[i] = time_sub+"시간 전";
+              }
+              else{ // 두 시각의 차이가 60분이 넘지 않는다면
+                time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
+                written_time[i] = time_sub+"분 전";
+              }
             }
           }
         }
@@ -354,8 +361,15 @@ router.get('/partpopular/:user_nick/:part', (req, res) => {
               }
             }
             else{ // 같은 날이고 시각이 다르다면
-              time_sub = now_time.getHours() - moment(written_time[i]).hours();
-              written_time[i] = time_sub+"시간 전";
+              time_sub = (now_time.getHours()*60 + now_time.getMinutes()) - ( moment(written_time[i]).hours()*60 + moment(written_time[i]).minutes());
+              if(time_sub >= 60){ // 두 시각의 차이가 60분이 넘는다면
+                time_sub = now_time.getHours() - moment(written_time[i]).hours();
+                written_time[i] = time_sub+"시간 전";
+              }
+              else{ // 두 시각의 차이가 60분이 넘지 않는다면
+                time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
+                written_time[i] = time_sub+"분 전";
+              }
             }
           }
         }
@@ -550,8 +564,15 @@ router.get('/categorylatest/:user_nick/:category', (req, res) => {
               }
             }
             else{ // 같은 날이고 시각이 다르다면
-              time_sub = now_time.getHours() - moment(written_time[i]).hours();
-              written_time[i] = time_sub+"시간 전";
+              time_sub = (now_time.getHours()*60 + now_time.getMinutes()) - ( moment(written_time[i]).hours()*60 + moment(written_time[i]).minutes());
+              if(time_sub >= 60){ // 두 시각의 차이가 60분이 넘는다면
+                time_sub = now_time.getHours() - moment(written_time[i]).hours();
+                written_time[i] = time_sub+"시간 전";
+              }
+              else{ // 두 시각의 차이가 60분이 넘지 않는다면
+                time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
+                written_time[i] = time_sub+"분 전";
+              }
             }
           }
         }
@@ -746,8 +767,15 @@ router.get('/categorypopular/:user_nick/:category', (req, res) => {
               }
             }
             else{ // 같은 날이고 시각이 다르다면
-              time_sub = now_time.getHours() - moment(written_time[i]).hours();
-              written_time[i] = time_sub+"시간 전";
+              time_sub = (now_time.getHours()*60 + now_time.getMinutes()) - ( moment(written_time[i]).hours()*60 + moment(written_time[i]).minutes());
+              if(time_sub >= 60){ // 두 시각의 차이가 60분이 넘는다면
+                time_sub = now_time.getHours() - moment(written_time[i]).hours();
+                written_time[i] = time_sub+"시간 전";
+              }
+              else{ // 두 시각의 차이가 60분이 넘지 않는다면
+                time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
+                written_time[i] = time_sub+"분 전";
+              }
             }
           }
         }

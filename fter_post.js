@@ -154,7 +154,6 @@ router.post('/read', (req, res) => {
       imageInfo.push(data[0].image3);
       imageInfo.push(data[0].image4);
       imageInfo.push(data[0].image5);
-      console.log(imageInfo);
       for(var d=0; d < 5; d++){
         if( imageInfo[d] !== null){
           ary_image.push(imageInfo[d]);
@@ -187,6 +186,37 @@ router.post('/read', (req, res) => {
         else{
           let count=0;
           let ary_commentinfo = [];
+          let now_time = new Date();
+          let time_sub;
+          let written_time = [];
+          for(var i=0;i<data4.length;i++){
+            written_time[i] =  data4[i].written_time;
+            if(moment(written_time[i]).date() != now_time.getDate()){ // 같은 날이 아니면 그냥 날짜를 넣어줌
+                written_time[i] =  moment(written_time[i]).format('YYYY-MM-DD');
+            }
+            else{
+              if(moment(written_time[i]).hours()==now_time.getHours()){ // 같은 날이고 시각도 같다면
+                if(moment(written_time[i]).minutes() == now_time.getMinutes()){ // '분'까지 같다면
+                  written_time[i] = "방금 전";
+                }
+                else{ // 같은 날이고 시각도 같은데 '분'이 다르면
+                  time_sub = now_time.getMinutes() - moment(written_time[i]).minutes();
+                  written_time[i] = time_sub+"분 전";
+                }
+              }
+              else{ // 같은 날이고 시각이 다르다면
+                time_sub = (now_time.getHours()*60 + now_time.getMinutes()) - ( moment(written_time[i]).hours()*60 + moment(written_time[i]).minutes());
+                if(time_sub >= 60){ // 두 시각의 차이가 60분이 넘는다면
+                  time_sub = now_time.getHours() - moment(written_time[i]).hours();
+                  written_time[i] = time_sub+"시간 전";
+                }
+                else{ // 두 시각의 차이가 60분이 넘지 않는다면
+                  time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
+                  written_time[i] = time_sub+"분 전";
+                }
+              }
+            }
+          }
           for (let c = 0; c < data4.length; c++) {
             if(count < 2){
               let commentinfo = {
@@ -195,7 +225,7 @@ router.post('/read', (req, res) => {
                 image: data4[c].profile,
                 level: data4[c].level,
                 part: data4[c].part,
-                written_time: data4[c].written_time,
+                written_time: written_time[c],
                 statemessage: data4[c].statemessage
               };
               ary_commentinfo.push(commentinfo);
@@ -203,6 +233,7 @@ router.post('/read', (req, res) => {
               console.log(count);
             }
           }
+          console.log(ary_commentinfo[0]);
           let ary_all = { postinpo: postinfo, commentinfo: ary_commentinfo };
           res.status(200).send({
             result: ary_all,
