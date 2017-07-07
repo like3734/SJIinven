@@ -137,22 +137,28 @@ router.post('/add', (req, res) => {
   })
   .then(([data3, connection]) => {
     return new Promise((fulfill, reject) => {
-      let query4 = 'insert into Alarm set ? ';
-      let alarminfo = {
-        user_nick: data3[0].user_nick,
-        comment_id: data3[0].id
-      };
-      connection.query(query4, alarminfo, (err, data4) => {
-        if(err) {
-          res.status(500).send({ message: 'insert alarminfo err : ' + err});
-          connection.rollback();
-        }
-        else{
-          res.status(203).send({ message: 'ok'});
-          connection.commit();
-        }
+      if(req.body.user_nick == data3[0].user_nick){
+        res.status(200).send({ message: 'ok' });
         connection.release();
-      });
+      }
+      else{
+        let query4 = 'insert into Alarm set ? ';
+        let alarminfo = {
+          user_nick: data3[0].user_nick,
+          comment_id: data3[0].id
+        };
+        connection.query(query4, alarminfo, (err, data4) => {
+          if(err) {
+            res.status(500).send({ message: 'insert alarminfo err : ' + err});
+            connection.rollback();
+          }
+          else{
+            res.status(203).send({ message: 'ok'});
+            connection.commit();
+          }
+          connection.release();
+        });
+      }
     });
   })
 })

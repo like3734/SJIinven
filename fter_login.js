@@ -1,7 +1,7 @@
 
 
 
-/////////////////////////////////// 암호화 x //////////////////////////////////
+/////////////////////////////////// 암호화 o //////////////////////////////////
 // //페북,카카오 연동 로그인
 router.post('/', function(req, res) {
   return new Promise((fulfill, reject) => {
@@ -18,7 +18,7 @@ router.post('/', function(req, res) {
     })
     .then((connection) => {
       return new Promise((fulfill, reject) => {
-        let comid = req.body.id;
+        let comid = md5(req.body.id);
         console.log(comid);
         let query = 'select userid from User where userid = ? ';
         connection.query(query, comid, function(err, data) {
@@ -38,8 +38,6 @@ router.post('/', function(req, res) {
         values[2].query(query2, comid, (err, data2) =>{
           if(err) res.status(500).send({ result: {}, message: 'id select error : ' + err});
           else{
-            console.log(data2);
-            console.log(data2[0].idcount);
             if(data2[0].idcount === 0){
               let query3 = 'insert into ID set ? ';
               let record = { id: comid };
@@ -120,9 +118,10 @@ router.post('/profile', upload.single('image'), function(req, res) {
     })
     .then((connection) => {
           let query = 'insert into User set ?' ; //3. 포스트 테이블에 게시글 저장
+          let id = md5(req.body.id);
           console.log(req.file);
           let record = {
-            userid: req.body.id,
+            userid: id,
             nickname: req.body.nickname,
             part: req.body.part,
             statemessage: req.body.statemessage,
