@@ -1,0 +1,102 @@
+[
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_default.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_tint_default.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_disable_only_material_dark.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\com_facebook_send_button_text_color.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\c3c9471e4aed981878f4baf5212952bd7fb54e6c\\output\\res\\color\\com_facebook_send_button_text_color.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_btn_colored_text_material.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\design_error.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\4249582001becfec9dcc43b73fbfd9896dd365d3\\output\\res\\color\\design_error.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\ucrop_scale_text_view_selector.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\8f94ff2939647c936e83f9585988da674ad9e30f\\output\\res\\color\\ucrop_scale_text_view_selector.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_btn_checkable.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_disable_only_material_light.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\switch_thumb_material_dark.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_switch_track.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_light.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_secondary_text_material_light.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_edittext.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_btn_colored_borderless_text_material.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\switch_thumb_material_light.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_seek_thumb.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_material_light.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_dark.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_search_url_text.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_search_url_text.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\com_facebook_button_text_color.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\c3c9471e4aed981878f4baf5212952bd7fb54e6c\\output\\res\\color\\com_facebook_button_text_color.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_material_dark.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_spinner.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_tint_spinner.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_switch_thumb.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_hint_foreground_material_light.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_hint_foreground_material_light.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_hint_foreground_material_dark.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\f7087bdb6630863f8c80e5a4d8bab86d9cb6ef5d\\output\\res\\color\\abc_hint_foreground_material_dark.xml"
+    },
+    {
+        "merged": "C:\\project\\fter\\Fter\\app\\build\\intermediates\\res\\merged\\release\\color\\design_tint_password_toggle.xml",
+        "source": "C:\\Users\\f\\.android\\build-cache\\4249582001becfec9dcc43b73fbfd9896dd365d3\\output\\res\\color\\design_tint_password_toggle.xml"
+    }
+]

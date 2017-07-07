@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="y-photopicker-0.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/8f94ff2939647c936e83f9585988da674ad9e30f/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/8f94ff2939647c936e83f9585988da674ad9e30f/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.yongbeam.y_photopicker/y-photopicker/0.0.1/5437f6883d24233af1f1222023c135797144ca49/y-photopicker-0.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

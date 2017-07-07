@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="46dp"
+    android:id="@+id/my_page_post">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="46dp">
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="14dp"
+            android:textSize="12dp"
+            android:textColor="#000000"
+            android:id="@+id/my_page_title"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="yy/mm/dd"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="19dp"
+            android:textSize="12dp"
+            android:id="@+id/my_page_date"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fter.sopt.fter.myPage.MyPageSettingActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:layout_marginTop="31dp"
+            android:src="@drawable/settingname" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:id="@+id/setting_gogofriend">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            />
+
+        <ImageView
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="23dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/friend"
+            android:id="@+id/friendParty"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/friendParty"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/gogogofriend"
+            android:id="@+id/friendchodae"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/friendchodae"
+            android:src="@drawable/facebooklogo"
+            android:layout_marginTop="52dp"
+            android:layout_marginLeft="104dp"
+            android:id="@+id/facebooklogo"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/kakaologo"
+            android:layout_toRightOf="@id/facebooklogo"
+            android:id="@+id/kakaologo"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="52dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/settingline"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/friendchodae"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left">
+
+        <ImageView
+            android:id="@+id/alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/alarm" />
+
+        <ImageView
+            android:id="@+id/noalarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/alarm"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/noalarm" />
+
+        <Switch
+            android:id="@+id/pushAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="43dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/noalarm"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/settingline" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="left"
+        android:id="@+id/logout">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logout"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="13dp" />
+
+    </RelativeLayout>
+</LinearLayout>

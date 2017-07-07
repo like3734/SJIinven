@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fter.sopt.fter.search.SearchActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_title_bar"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/founddf"
+            />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginLeft="24dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_write_bar"
+            android:src="@drawable/findselectbox"
+            />
+
+        <Spinner
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:id="@+id/search_part"
+            android:entries="@array/part"
+            />
+
+        <EditText
+            android:layout_toRightOf="@id/search_part"
+            android:layout_width="160dp"
+            android:layout_height="14dp"
+            android:id="@+id/write_keyword"
+            android:textCursorDrawable="@null"
+            android:textColor="#899EF2"
+            android:textSize="11dp"
+            android:layout_marginTop="9dp"
+            android:background="@null"
+            android:singleLine="true"
+            />
+
+
+        <ImageView
+            android:id="@+id/searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/foundingngng"
+            android:layout_toRightOf="@id/write_keyword"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/search_result">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="49dp"
+            android:layout_marginBottom="7dp"
+            android:src="@drawable/writerer"
+            android:id="@+id/search_writer_result"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/search_writer_result"
+            android:layout_marginLeft="130dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginRight="121dp"
+            android:src="@drawable/title"
+            android:id="@+id/search_title_result"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/foundlinefff"
+            android:layout_below="@id/search_writer_result"
+            android:id="@+id/writer_underline"
+            android:layout_marginLeft="24dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/foundlinfefs"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="26dp"
+            android:layout_toRightOf="@id/writer_underline"
+            android:layout_below="@id/search_title_result"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/serchRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="7dp"
+            android:layout_marginTop="30dp"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/noResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_centerHorizontal="true"
+            android:text="검색 결과가 없습니다."/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
