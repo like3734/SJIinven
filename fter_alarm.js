@@ -1,4 +1,5 @@
 
+
 // 알람창
 router.get('/:user_nick', function(req, res) {
   return new Promise((fulfill, reject) => {
@@ -95,7 +96,7 @@ router.get('/:user_nick', function(req, res) {
 
 
 // 알람창에서 댓글 모두 보기로 넘어가기
-router.post('/allcomment' , (req,res) => {
+router.post('/relatedpost' , (req,res) => {
   return new Promise((fulfill, reject) => {
     pool.getConnection((err, connection) => {
       if(err) reject(err);
@@ -121,30 +122,117 @@ router.post('/allcomment' , (req,res) => {
       });
     });
   })
-  .catch(([err, connection]) => {
-    res.status(500).send({ result: [] , message: "update readInfo err : " + err});
+  .catch(err => {
+    res.status(500).send({ result: [], message: 'beginning transaction error: '+err});
     connection.rollback();
     connection.release();
   })
   .then(connection => {
     return new Promise((fulfill, reject) => {
-      let query2 = 'select Comment.user_nick, User.profile, Comment.content, Comment.written_time, Comment.id, Comment.post_id from User,Comment where User.nickname=Comment.user_nick and Comment.post_id = ? order by Comment.id desc';
-      connection.query(query2, req.body.post_id, (err, data) =>{
-        if(err) {
-          res.status(500).send({ result: [], message: "select commentInfo err : " + err});
+      console.log(req.body.user_nick);
+      console.log(req.body.post_id);
+      let query = ' select User.nickname, User.level, User.part as userpart , User.profile, User.statemessage, Post.title, Post.contents, Post.written_time, Post.part as postpart, Post.category, Post.image1, Post.image2, Post.image3, Post.image4, Post.image5, Post.likecount, Post.commentcount from User, Post where User.nickname = Post.user_nick and Post.id = ? ';
+      connection.query(query, req.body.post_id, (err, data) =>{
+        if(err) reject([err, connection]);
+        else fulfill([data, connection]);
+      });
+    });
+  })
+  .catch(([err, connection]) => {
+    res.status(500).send({ result: [], message: "select info : " + err});
+    connection.rollback();
+    connection.release();
+  })
+  .then(([data, connection]) => {
+    return new Promise((fulfill, reject) => {
+      let query2 = 'select post_id from PostLikeCount where user_nick = ?' ;
+      connection.query(query2, req.body.user_nick, (err, data2) => {
+        if(err) reject([err, connection]);
+        else fulfill([data, data2, connection]);
+      });
+    });
+  })
+  .catch(([err, connection]) => {
+    res.status(500).send({ result: [], message: "select PostLikeCount err : " + err});
+    connection.rollback();
+    connection.release();
+  })
+  .then(([data, data2, connection]) => {
+    return new Promise((fulfill, reject) => {
+      let likecheck = 0;
+      for(let a=0; a < data2.length ; a++){
+        let id = data2[a].post_id;
+        if(req.body.post_id == data2[a].post_id){
+          likecheck = 1;
+        }
+      }
+      let query3 = 'select post_id from FavoritePost where user_nick = ?';
+      connection.query(query3, req.body.user_nick, (err, data3) => {
+        if(err) reject([err, connection]);
+        else fulfill([data, likecheck, data3, connection]);
+      });
+    });
+  })
+  .catch(([err, connection]) => {
+    res.status(500).send({ result: [], message: "select FavoritePost err : " + err});
+    connection.rollback();
+    connection.release();
+  })
+  .then(([data, likecheck, data3, connection]) => {
+    return new Promise((fulfill, reject) => {
+      let ary_image = [];
+      let imageInfo = [];
+      let markcheck = 0;
+      for(let a=0; a< data3.length ; a++){
+        let id = data3[a].post_id;
+        if(req.body.post_id == data3[a].post_id){
+          markcheck = 1;
+        }
+      }
+      imageInfo.push(data[0].image1);
+      imageInfo.push(data[0].image2);
+      imageInfo.push(data[0].image3);
+      imageInfo.push(data[0].image4);
+      imageInfo.push(data[0].image5);
+      for(var d=0; d < 5; d++){
+        if( imageInfo[d] !== null){
+          ary_image.push(imageInfo[d]);
+        }
+      }
+
+      let postinfo = {
+        nickname: data[0].nickname,
+        level: data[0].level,
+        userpart: data[0].userpart,
+        profile: data[0].profile,
+        statemessage: data[0].statemessage,
+        title: data[0].title,
+        contents: data[0].contents,
+        written_time: data[0].written_time,
+        postpart: data[0].postpart,
+        category: data[0].category,
+        likecount: data[0].likecount,
+        commentcount: data[0].commentcount,
+        likecheck: likecheck,
+        markcheck: markcheck,
+        image: ary_image
+      };
+      let query4 = 'select Comment.user_nick, Comment.content, User.profile, Comment.written_time, User.level, User.part, User.statemessage from Comment, User where Comment.post_id = ? and Comment.user_nick = User.nickname order by Comment.id desc';
+      connection.query(query4, req.body.post_id, (err, data4) => {
+        if(err){
+          res.status(500).send({ result: [], message: "select commentinfo err : " + err});
           connection.rollback();
         }
-        else {
-          var written_time = []; // 작성 시간
-          var record = []; // 객체 배열
-          var now_time = new Date(); // 현재 시간
-          var time_sub = 0; // 시간차
-
-          console.log(now_time);
-          for(var i=0;i<data.length;i++){
-            written_time[i] =  data[i].written_time;
+        else{
+          let count=0;
+          let ary_commentinfo = [];
+          let now_time = new Date();
+          let time_sub;
+          let written_time = [];
+          for(var i=0;i<data4.length;i++){
+            written_time[i] =  data4[i].written_time;
             if(moment(written_time[i]).date() != now_time.getDate()){ // 같은 날이 아니면 그냥 날짜를 넣어줌
-                written_time[i] = moment(written_time[i]).format('YYYY-MM-DD');
+                written_time[i] =  moment(written_time[i]).format('YYYY-MM-DD');
             }
             else{
               if(moment(written_time[i]).hours()==now_time.getHours()){ // 같은 날이고 시각도 같다면
@@ -157,7 +245,7 @@ router.post('/allcomment' , (req,res) => {
                 }
               }
               else{ // 같은 날이고 시각이 다르다면
-                time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
+                time_sub = (now_time.getHours()*60 + now_time.getMinutes()) - ( moment(written_time[i]).hours()*60 + moment(written_time[i]).minutes());
                 if(time_sub >= 60){ // 두 시각의 차이가 60분이 넘는다면
                   time_sub = now_time.getHours() - moment(written_time[i]).hours();
                   written_time[i] = time_sub+"시간 전";
@@ -166,21 +254,31 @@ router.post('/allcomment' , (req,res) => {
                   time_sub = (now_time.getMinutes()+60) - moment(written_time[i]).minutes();
                   written_time[i] = time_sub+"분 전";
                 }
-
               }
             }
-            console.log(data[i].written_time);
           }
-
-          for(var j=0;j<data.length;j++){
-            record[j]={
-              user_nick: data[j].user_nick,
-              profile: data[j].profile,
-              content: data[j].content,
-              written_time: written_time[j]
-            };
+          for (let c = 0; c < data4.length; c++) {
+            if(count < 2){
+              let commentinfo = {
+                user_nick: data4[c].user_nick,
+                content: data4[c].content,
+                image: data4[c].profile,
+                level: data4[c].level,
+                part: data4[c].part,
+                written_time: written_time[c],
+                statemessage: data4[c].statemessage
+              };
+              ary_commentinfo.push(commentinfo);
+              count++;
+              console.log(count);
+            }
           }
-          res.status(200).send({ result : record, message: 'ok' });
+          console.log(ary_commentinfo[0]);
+          let ary_all = { postinpo: postinfo, commentinfo: ary_commentinfo };
+          res.status(200).send({
+            result: ary_all,
+            message: 'success'
+          });
           connection.commit();
         }
         connection.release();
