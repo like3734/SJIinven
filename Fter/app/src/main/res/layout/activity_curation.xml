@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        >
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/pic1"
+                    android:layout_width="153dp"
+                    android:layout_height="153dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/card1_1"
+                    android:layout_marginRight="14dp"/>
+
+                <ImageView
+                    android:id="@+id/pic2"
+                    android:layout_width="153dp"
+                    android:layout_height="153dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/card2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/pic3"
+                    android:layout_width="153dp"
+                    android:layout_height="153dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/card3"
+                    android:layout_marginRight="14dp"/>
+
+                <ImageView
+                    android:id="@+id/pic4"
+                    android:layout_width="153dp"
+                    android:layout_height="153dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/card4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/pic5"
+                    android:layout_width="153dp"
+                    android:layout_height="153dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/card5"
+                    android:layout_marginRight="14dp"/>
+
+                <ImageView
+                    android:id="@+id/pic6"
+                    android:layout_width="153dp"
+                    android:layout_height="153dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/card6" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

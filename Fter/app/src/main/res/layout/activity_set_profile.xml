@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fter.sopt.fter.profile.SetProfile"
+    android:weightSum="10">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/setprofile"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="144dp"
+            android:layout_marginRight="144dp"
+            android:src="@drawable/profilename"
+            />
+    </LinearLayout>
+    <!--</android.support.v7.widget.Toolbar>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/user_img_rel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="29dp"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:id="@+id/user_img"
+                android:layout_marginLeft="10dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/profile_3" />
+
+            <ImageView
+                android:id="@+id/pick_user_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/profilecamera"
+                android:layout_marginLeft="63dp"
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profilecam_rel"
+            android:layout_marginBottom="7dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/statemessage"
+                android:id="@+id/status"
+                android:text="상태 메세지 "
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/status_message"
+                android:layout_toRightOf="@id/status"
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="26dp"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:textColor="#899EF2"
+                android:textSize="12dp"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_below="@+id/status_rel"
+            android:id="@+id/username_rel"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/setnickname"
+                android:src="@drawable/nickname"
+                android:text="닉네임"
+                android:layout_gravity="center"
+                />
+
+            <EditText
+                android:layout_width="170dp"
+                android:layout_marginLeft="19dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/nickname"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:textColor="#899EF2"
+                android:textSize="12dp"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/redandencycheckblue"
+                android:id="@+id/nickcheck"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:orientation="horizontal"
+            android:id="@+id/workpart_rel">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/workpart"
+                android:src="@drawable/work"
+                android:text="업무"
+                android:layout_gravity="center"
+                />
+
+            <Spinner
+                android:id="@+id/myworkpart"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/workpart"
+                android:layout_marginRight="84dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selectfff"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="57dp"
+        android:layout_marginBottom="41dp"
+        android:layout_marginRight="57dp"
+        android:layout_alignParentBottom="true"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ok"
+            android:src="@drawable/okbutton"
+            android:background="@android:color/transparent"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

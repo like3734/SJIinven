@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.fter.sopt.fter">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:name=".application.ApplicationController"
+        android:allowBackup="true"
+        android:icon="@drawable/really_really_logo"
+        android:label="@string/APP_name"
+        android:roundIcon="@drawable/really_really_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="theme, icon, label">
+        <activity
+            android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="com.yongbeam.y_photopicker.util.photopicker.ucrop.UCropActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".first.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".register.RegisterActivity" />
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity android:name=".first.LoginActivity" />
+        <activity android:name=".first.KakaoSignupActivity" />
+
+        <!-- <activity android:name=".main.MainTimeline" /> -->
+        <!-- <activity android:name=".first.FacebookSignupActivity" /> -->
+        <activity android:name=".profile.SetProfile">
+        </activity>
+        <activity
+            android:name=".detail.DetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".myPage.MyPageActivity" />
+        <activity android:name=".profile.ProfileModify" />
+        <activity
+            android:name=".main.MainTimeline"
+            android:clearTaskOnLaunch="true"></activity>
+        <activity
+            android:name=".comment.CommentActivity" />
+        <activity
+            android:name=".search.SearchActivity"/>
+        <activity
+            android:name=".main.SetPart" />
+        <activity
+            android:name=".category.CategoryActivity"
+            android:clearTaskOnLaunch="true" />
+        <activity
+            android:name=".category.SetCategory" />
+        <activity
+            android:name=".enlargement.EnlargementActivity" />
+        <activity
+            android:name=".myPage.MyPageSettingActivity" />
+        <activity android:name=".curation.MainActivity" />
+        <activity android:name=".curation.CardnewsDetailActivity" />
+        <activity android:name=".alarm.AlarmActivity"></activity>
+    </application>
+
+</manifest>

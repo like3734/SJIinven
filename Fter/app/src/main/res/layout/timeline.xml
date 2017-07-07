@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.fter.sopt.fter.main.MainTimeline">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainList_writer_bar">
+
+        <!--이거 누르면 프로필 뜨게-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/writer_bar">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/mainList_writer_img"
+                android:layout_marginTop="14dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="9dp"
+                android:src="@drawable/profile_3"
+                android:scaleType="fitCenter"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mainList_level"
+                android:textStyle="bold"
+                android:textSize="13dp"
+                android:textColor="#000000"
+                android:layout_toRightOf="@id/mainList_writer_img"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="23dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mainList_writer"
+                android:textSize="13dp"
+                android:textColor="#000000"
+                android:layout_toRightOf="@id/mainList_level"
+                android:layout_marginTop="23dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="3dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mainList_part"
+                android:layout_below="@id/mainList_writer"
+                android:layout_marginLeft="75dp"
+                android:textColor="#7b7b7b"
+                android:textSize="11dp"
+                android:layout_marginTop="4dp"
+                />
+
+        </RelativeLayout>
+
+        <!--누르면 삭제 신고-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/timelineinfoicon"
+            android:background="@android:color/transparent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="19dp"
+            android:layout_marginTop="26dp"
+            android:id="@+id/seeDetail"
+            />
+
+    </RelativeLayout>
+
+
+
+    <!--이거누르면 글 상세보기-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mainList_writer_bar"
+        android:id="@+id/mainList_space"
+        >
+
+        <TextView
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainList_title"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="11dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainList_time"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="27dp"
+            android:textSize="11dp"
+            android:text="yy/mm/dd"
+            android:textColor="#7b7b7b"
+            />
+        <TextView
+            android:id="@+id/mainList_content"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:layout_below="@id/mainList_title"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="27dp"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mainList_content"
+            android:paddingTop="11dp"
+            android:id="@+id/mainList_images">
+
+            <ImageView
+                android:layout_marginLeft="20dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/camera"
+                android:id="@+id/mainList_img1"
+                android:visibility="invisible"
+                android:scaleType="fitCenter"/>
+
+            <ImageView
+                android:layout_toRightOf="@id/mainList_img1"
+                android:layout_marginLeft="14dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/camera"
+                android:id="@+id/mainList_img2"
+                android:visibility="invisible"
+                android:scaleType="fitCenter"/>
+
+            <ImageView
+                android:layout_marginLeft="14dp"
+                android:layout_toRightOf="@id/mainList_img2"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/camera"
+                android:id="@+id/mainList_img3"
+                android:visibility="invisible"
+                android:scaleType="fitCenter"/>
+
+            <ImageView
+                android:layout_marginLeft="14dp"
+                android:layout_toRightOf="@id/mainList_img3"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/camera"
+                android:id="@+id/mainList_img4"
+                android:visibility="invisible"
+                android:scaleType="fitCenter"/>
+
+            <ImageView
+                android:layout_marginLeft="14dp"
+                android:layout_toRightOf="@id/mainList_img4"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/camera"
+                android:visibility="invisible"
+                android:id="@+id/mainList_img5"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mainList_space"
+        android:id="@+id/mytrace"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="13dp"
+        >
+
+        <!--좋아요-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/mainList_likeicon"
+            />
+
+        <!--좋아요 숫자-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/mainList_likeicon"
+            android:id="@+id/mainList_like"
+            android:layout_marginLeft="3dp"
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/mainList_like"
+            android:id="@+id/comment_content"
+            >
+
+            <!--댓글버튼-->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/noun_847910_cc"
+                android:background="@android:color/transparent"
+                android:id="@+id/mainList_commenticon"
+                />
+
+            <!--댓글 개수-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mainList_comment_count"
+                android:layout_toRightOf="@id/mainList_commenticon"
+                android:layout_marginLeft="3dp"
+                />
+
+        </RelativeLayout>
+
+        <!--북마크-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="21dp"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:id="@+id/mainList_bookmarkicon"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mytrace"
+        android:id="@+id/latest_comment"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/latest_comment1"
+            >
+
+            <!--댓글 쓴 사람 프로필-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/comment1_userinfo">
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:id="@+id/mainList_comment1_img"
+                    android:src="@drawable/profilealarm"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/mainList_comment1_img"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="7dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:id="@+id/mainList_comment1_name"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginLeft="147dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/comment1_content">
+
+                <TextView
+                    android:layout_width="205dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="27dp"
+                    android:layout_marginTop="7dp"
+                    android:textSize="12dp"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:id="@+id/mainList_comment1_content"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/latest_comment1"
+            android:id="@+id/latest_comment2"
+            android:paddingBottom="15dp"
+            >
+
+            <!--2번쨰 프로필-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/comment2_userinfo">
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/profilealarm"
+                    android:id="@+id/mainList_comment2_img"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="7dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:layout_toRightOf="@id/mainList_comment2_img"
+                    android:id="@+id/mainList_comment2_name"/>
+
+            </RelativeLayout>
+
+            <!--2번째 댓글 보여주기-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="147dp"
+                android:id="@+id/comment2_content">
+
+                <TextView
+                    android:layout_width="205dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="27dp"
+                    android:layout_marginTop="7dp"
+                    android:textSize="12dp"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:id="@+id/mainList_comment2_content"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_below="@id/latest_comment"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@android:color/darker_gray"
+        android:alpha=".30"/>
+
+
+</RelativeLayout>

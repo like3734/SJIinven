@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/writingpost"
+        android:background="@drawable/profiletopbox">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/write"
+            android:layout_centerHorizontal="true"
+            android:text="글 작성하기"
+            android:textSize="17dp"
+            android:textColor="#000000"
+            android:layout_marginTop="25dp"
+            />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/register_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/postbutton"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:layout_below="@id/writingpost"
+        android:id="@+id/register_writer_info"
+        >
+
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="33dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/profile_3"
+            android:id="@+id/register_writer"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/register_writer"
+                    android:layout_marginTop="12dp"
+                    android:text="LV.1"
+                    android:textSize="13dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:id="@+id/register_writer_level"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/register_writer_level"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="1dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:text="이원진"
+                    android:textSize="13dp"
+                    android:id="@+id/register_writer_name"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_writer_part"
+                android:layout_below="@id/register_writer_level"
+                android:layout_marginTop="4dp"
+                android:textSize="12dp"
+                android:text="경영/마케팅"
+                android:textColor="#7b7b7b"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_writer_info"
+        android:orientation="vertical"
+        android:id="@+id/register_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/register_title">
+
+            <EditText
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:id="@+id/register_write_title"
+                android:textColor="#000000"
+                android:paddingLeft="10dp"
+                android:textSize="10dp"
+                android:background="@drawable/titlebox"
+                android:hint="제목을 입력해주세요"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:layout_below="@id/register_title"
+            >
+
+            <EditText
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:background="@drawable/contentbox"
+                android:gravity="top"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:id="@+id/write_content"
+                android:hint="내용을 작성해주세요"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:text="/500"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="30dp"
+        android:id="@+id/text_length"/>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/register_content"
+        android:id="@+id/register_mypicture"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:layout_marginLeft="33dp"
+            android:text="사진"
+            android:textSize="13dp"
+            android:id="@+id/pick_picture"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imglayout1">
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/camera"
+                    android:id="@+id/img1"
+                    android:layout_marginLeft="8dp"
+                    android:scaleType="fitCenter"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/plusicon"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="35dp"
+                    android:id="@+id/addimg1"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imglayout2"
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/camera"
+                    android:id="@+id/img2"
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="fitCenter"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/plusicon"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/addimg2"
+                    android:scaleType="fitCenter"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imglayout3"
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/camera"
+                    android:id="@+id/img3"
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="fitCenter"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/plusicon"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/addimg3"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imglayout4"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/camera"
+                    android:id="@+id/img4"
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="fitCenter"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/plusicon"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/addimg4"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imglayout5"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/camera"
+                    android:id="@+id/img5"
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="fitCenter"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/plusicon"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/addimg5"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_mypicture"
+        android:orientation="horizontal"
+        android:id="@+id/register_category">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="카테고리"
+            android:id="@+id/register_mycategory"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="30dp"
+            />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/register_mycategory"
+            android:layout_marginLeft="37dp"
+            android:id="@+id/mycategory_spinner"
+            android:background="@drawable/selectfff"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/register_category">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="직무선택"
+            android:id="@+id/register_mypart"
+            android:layout_marginLeft="30dp"
+            />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/register_mypart"
+            android:layout_marginLeft="37dp"
+            android:background="@drawable/selectfff"
+            android:id="@+id/mypart_spinner"
+            />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

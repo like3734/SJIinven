@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context="com.fter.sopt.fter.main.MainTimeline">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeline_title">
+
+            <android.support.v4.view.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:id="@+id/pager">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mainimg" />
+
+            </android.support.v4.view.ViewPager>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="31dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff"
+                android:text="디자인"
+                android:layout_marginLeft="145dp"
+                android:src="@drawable/timelinenamemarketing"
+                android:id="@+id/mypart"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/timelinemap"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp"
+                android:id="@+id/mapbutton"
+                android:layout_marginTop="30dp"
+                android:background="@android:color/transparent"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/timelinesearchicon"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
+                android:id="@+id/searchbutton"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:id="@+id/tablayout"
+        android:visibility="gone">
+    </android.support.design.widget.TabLayout>
+
+    <android.support.design.widget.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/m_tablayout"
+        app:tabIndicatorColor="#899EF2"
+        android:layout_below="@id/pager"
+        >
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="346dp"
+        android:id="@+id/m_pager"
+        android:layout_below="@id/m_tablayout">
+    </android.support.v4.view.ViewPager>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:background="#F3F3F3">
+
+        <ImageView
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/navhomeicon"
+            android:id="@+id/go_home"/>
+        <ImageView
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/navwritingicon"
+            android:id="@+id/go_writing"/>
+        <ImageView
+            android:layout_marginLeft="46dp"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/navcateicon"
+            android:id="@+id/go_category"/>
+        <ImageView
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/navalamicon"
+            android:id="@+id/go_alam"/>
+        <ImageView
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/navmapageicon"
+            android:id="@+id/go_mypage"/>
+    </LinearLayout>
+
+
+</LinearLayout>
