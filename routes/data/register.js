@@ -61,12 +61,33 @@ router.get('/', (req, res) => {
     res.status(400).send({ message: 'select query err : ' + err});
     connection.release();
   })
-  .then(([dept,topic,subtopic,data,connection]) => {
-    let group = [];
+  .then(([dept, topic, subtopic, data, connection]) => {
+    return new Promise((fulfill, reject) => {
+      let group = [];
+      for(let i=0; i<data.length; i++){
+        group.push(data[i].group_name);
+      }
+      let query = 'select writer_name, writer_belong from writer ';
+      connection.query(query, (err, data) => {
+        if(err) reject([err, connection]);
+        else fulfill([dept, topic, subtopic, group, data, connection]);
+      })
+    })
+  })
+  .catch(([err, connection]) => {
+    res.status(400).send({ message: 'select query err : ' + err});
+    connection.release();
+  })
+  .then(([dept,topic,subtopic,group,data,connection]) => {
+    let writerInfo = [];
     for(let i=0; i<data.length; i++){
-      group.push(data[i].group_name);
+      let writer = {
+        name: data[i].writer_name,
+        belong: data[i].writer_belong
+      };
+      writerInfo.push(writer);
     }
-    res.status(200).send({ dept:dept, topic:topic, subtopic:subtopic, group:group, message: 'ok' });
+    res.status(200).send({ dept:dept, topic:topic, subtopic:subtopic, group:group, writer:writerInfo, message: 'ok' });
     connection.release();
   })
 })
