@@ -10,7 +10,7 @@ public class Main{
     static int n;
     static int [][] list;
     
-// Main
+// 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
