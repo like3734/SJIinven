@@ -1,3 +1,3 @@
 # codebook
 
-<ul>array 정렬 -> Arrays.sort() vs list 정렬 -> Collections.sort()</ul>
+<li>array 정렬 -> Arrays.sort() vs list 정렬 -> Collections.sort()</li>
