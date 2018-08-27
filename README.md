@@ -1,2 +1,2 @@
 # SJIinven
-!Beckjoon codebook
+!Baekjoon codebook
