@@ -1,2 +1,2 @@
 # SJIinven
-Jonginsgit
+!Beckjoon codebook
