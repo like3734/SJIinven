@@ -1,0 +1,77 @@
+package baekjoon;
+
+import java.util.*;
+import java.io.*;
+import java.math.*;
+import java.lang.Math;
+
+
+public class Main{
+    static int n;
+    static ArrayList<Info> itemList;
+    
+// Main
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        
+        itemList = new ArrayList<Info>();
+        
+        for(int i=0; i<n; i++) {
+        	String a = sc.next().toString();
+        	int b = sc.nextInt();
+        	int c = sc.nextInt();
+        	int d = sc.nextInt();
+        	Info t = new Info(b,c,d,a);
+        	itemList.add(t);
+        }
+        
+        Collections.sort(itemList, new Comparator<Info>() {
+        	public int compare(Info l1, Info l2) {
+        		if(l1.getk() == l2.getk() && l1.gete() == l2.gete() 
+        				&& l1.getm() == l2.getm() ) return l1.getName().compareTo(l2.getName());
+        		else if(l1.getk() == l2.getk() && l1.gete() == l2.gete()) return Integer.compare(l2.getm(), l1.getm());
+        		else if(l1.getk() == l2.getk()) return Integer.compare(l1.gete(), l2.gete());
+        		else return Integer.compare(l2.getk(), l1.getk());
+        	}
+        });
+        
+        
+        
+        for(int i=0; i<n; i++) {
+        	String bName = itemList.get(i).getName();
+        	System.out.println(bName);
+        }
+    
+    }
+}
+
+class Info{
+	private int m_score;
+	private int e_score;
+	private int k_score;
+	private String name;
+	
+	public Info(int k_score, int e_score, int m_score, String name) {
+		this.k_score = k_score;
+		this.e_score = e_score;
+		this.m_score = m_score;
+		this.name = name;
+	}
+	
+	public int getm() {
+		return m_score;
+	}
+	
+	public int gete() {
+		return e_score;
+	}
+	
+	public int getk() {
+		return k_score;
+	}
+	
+	public String getName() {
+		return name;
+	}
+}
