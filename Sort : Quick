@@ -1,0 +1,59 @@
+package baekjoon;
+
+import java.util.*;
+import java.io.*;
+import java.math.*;
+import java.lang.Math;
+
+
+public class Main{
+    static int n;
+    static int [] itemList;
+// Main
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        itemList = new int [n];
+        
+        for(int i=0; i<n; i++) {
+        	itemList[i] = sc.nextInt();
+        }
+        
+        int p = 0; int q= 0;
+        int r = n-1;
+        quick(itemList,p,r);
+        
+        for(int i=0; i<n; i++) {
+        	System.out.println(itemList[i]);
+        }
+        
+    }
+    
+    public static void quick(int[] A, int p, int r) {
+    	if(p<r) {
+    		int q = partition(A, p, r);
+    		quick(A, p, q-1);
+    		quick(A, q+1, r);
+    	}
+    }
+    
+    public static int partition(int[] A, int p,int r) {
+    	int pivot = A[r];
+    	int i = p-1;
+    	for(int j=0; j<r; j++) {
+    		if( A[j] <= pivot ) {
+    			i++;
+    			int temp = A[i];
+    			A[i] = A[j];
+    			A[j] = temp;
+    		}
+    		else {
+    			int temp = A[i+1];
+    			A[i+1] = A[r];
+    			A[r] = temp;
+    		}
+    	}
+    	return i+1;
+    }
+    
+}
