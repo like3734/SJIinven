@@ -1,0 +1,63 @@
+package baekjoon;
+
+import java.util.*;
+import java.io.*;
+import java.math.*;
+import java.lang.Math;
+
+
+public class Main{
+    static int n;
+    static int [] itemList;
+// Main
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        itemList = new int [n];
+        
+        for(int i=0; i<n; i++) {
+        	itemList[i] = sc.nextInt();
+        }
+        
+        int p = 0;
+        int r = n-1;
+        mergeSort(itemList,p,r);
+        
+        for(int i=0; i<n; i++) {
+        	System.out.println(itemList[i]);
+        }
+        
+    }
+    
+    public static void mergeSort(int[] A, int p, int r) {
+    	if(p<r) {
+    		int q = (p+r)/2;
+    		mergeSort(A, p, q);
+    		mergeSort(A, q+1, r);
+    		merge(A, p, q, r);
+    	}
+    }
+    
+    public static void merge(int[] A, int p, int q, int r) {
+    	int i = p, j = q+1, k = p;
+    	int [] temp;
+    	temp = new int [A.length];
+    	
+    	while(i<=q && j<=r) {
+    		if (A[i] <= A[j]) {
+    			temp[k++] = A[i++];
+    		}
+    		else {
+    			temp[k++] = A[j++];
+    		}
+    	}
+    	
+    	while (i<=q) temp[k++] = A[i++];
+    	while (j<=r) temp[k++] = A[j++];
+    	
+    	for(int t=p; t<=r; t++) {
+    		A[t] = temp[t];
+    	}
+    }
+    
+}
