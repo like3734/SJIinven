@@ -1,0 +1,53 @@
+package baekjoon;
+
+import java.util.*;
+import java.io.*;
+import java.math.*;
+import java.lang.Math;
+
+public class Main{
+    static boolean [] itemList;
+    static int max = 2000000; // 1003001
+// Main
+    public static void main(String[] args) throws Exception {
+    	Scanner sc = new Scanner(System.in);
+    	
+    	int n = sc.nextInt();
+    	itemList = new boolean[max+1];
+    	itemList[1] = true;
+    	for(int i=2; i<itemList.length; i++) {
+    		if(itemList[i]) continue;
+    		for(int j=i+i; j<itemList.length; j +=i) {
+    			itemList[j] = true;
+    		}
+    	}
+    	
+    	for(int i=n; n<=max; i++) {
+    		if(itemList[i]) continue;
+    		if(check(i)) {
+    			System.out.println(i);
+    			return;
+    		}
+    	}
+    	
+    }
+    
+    public static boolean check(int x) {
+    	int k = 0;
+    	int [] a = new int[8];
+    	while(x != 0) {
+    		a[k] = x%10;
+    		x /= 10;
+    		k++;
+    	}
+    	return pel(a,0,k-1);
+    }
+    
+    public static boolean pel(int [] item, int start, int end) {
+    	if( start >= end ) return true;
+    	if( item[start] != item[end] ) return false;
+    	return pel(item,start+1,end-1);
+    }
+    
+}
+
