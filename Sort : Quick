@@ -19,41 +19,39 @@ public class Main{
         	itemList[i] = sc.nextInt();
         }
         
-        int p = 0; int q= 0;
-        int r = n-1;
-        quick(itemList,p,r);
-        
+        quick(itemList, 0, itemList.length-1);
         for(int i=0; i<n; i++) {
         	System.out.println(itemList[i]);
         }
         
     }
     
-    public static void quick(int[] A, int p, int r) {
-    	if(p<r) {
-    		int q = partition(A, p, r);
-    		quick(A, p, q-1);
-    		quick(A, q+1, r);
+    public static void quick(int[] A, int begin, int end) {
+    	if(begin<end) {
+    		int q = partition(A, begin, end);
+    		quick(A, begin, q-1);
+    		quick(A, q+1, end);
     	}
     }
     
-    public static int partition(int[] A, int p,int r) {
-    	int pivot = A[r];
-    	int i = p-1;
-    	for(int j=0; j<r; j++) {
-    		if( A[j] <= pivot ) {
-    			i++;
-    			int temp = A[i];
-    			A[i] = A[j];
-    			A[j] = temp;
-    		}
-    		else {
-    			int temp = A[i+1];
-    			A[i+1] = A[r];
-    			A[r] = temp;
-    		}
-    	}
-    	return i+1;
+    public static int partition(int[] A, int begin, int end){
+        int left = begin;
+        int right = end;
+        int pivot = A[(left+right)/2];
+        
+        while( left < right ){
+            while( (A[left] < pivot) && (left < right) ) left++;
+            while( (A[right] > pivot) && (left < right)) right--;
+            
+            if( left < right ){
+                int temp = A[left];
+                A[left] = A[right];
+                A[right] = temp;
+            }
+        }
+        
+        return left;
     }
+    
     
 }
