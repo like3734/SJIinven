@@ -23,7 +23,7 @@ public class Main {
         else if(target == n ) return;
         else{
             A[index] = target;
-            combi(A, index+1, n, r-1, target+1);
+            combi(A, index+1, n, r-1, target+1); // ( 중복조합 : target+1 -> target )
             combi(A, index, n, r, target+1);
         }
     }
