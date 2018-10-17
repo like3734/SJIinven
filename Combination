@@ -1,0 +1,37 @@
+package baekjoon;
+
+import java.util.*;
+import java.io.*;
+import java.math.*;
+import java.lang.Math;
+
+public class Main {
+    
+    static int count;
+    public static void main(String[] args) {
+        int[] itemList = {1,2,3,4,5};
+        count = 0;
+        combi(itemList, 0, 5, 3, 0);
+        System.out.println("combi count : " + count);
+    }
+    
+    public static void combi(int[] A, int index, int n, int r, int target){
+        if(r==0) {
+            count++;
+            print(A, index);
+        }
+        else if(target == n ) return;
+        else{
+            A[index] = target;
+            combi(A, index+1, n, r-1, target+1);
+            combi(A, index, n, r, target+1);
+        }
+    }
+    
+    public static void print(int[] A, int length){
+        for(int i=0; i<length; i++){
+            System.out.print(A[i] + " ");
+        }
+        System.out.println();
+    }
+}
